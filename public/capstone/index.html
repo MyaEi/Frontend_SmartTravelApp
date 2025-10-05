@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligent Trip Planner</title>
+  <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css"> 
+  <link rel="stylesheet" href="Fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Reset default margins and paddings */
+    body, h1, h2, h3, p, section {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Header background and spacing */
+    header {
+        width: 100%;
+        background-image: url('images/1.jpg');
+        background-size: cover;
+        background-position: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    /* Remove navbar image stretching */
+    .navbar-brand img {
+        height: 100px;
+        width: auto;
+    }
+
+    /* Card hover effect */
+    .servicecard_hover {
+        cursor: pointer;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .servicecard_hover:hover {
+        background-color: #2d2e2e;
+        box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        transform: translateY(-5px);
+    }
+    .servicecard_hover:hover .card-title {
+        color: #eae6e4;
+        transition: color 0.3s ease;
+    }
+
+    /* Optional padding for sections */
+    .section-padding {
+        padding: 20px 0;
+    }
+
+    /* Fix gap between header and next section */
+    .no-gap {
+        margin-top: 0 !important;
+    }
+    .navbar {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.navbar-brand img {
+    height: 50px;
+    width: auto;
+}
+
+.home-title {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.navbar .nav-link {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="nav_div">
+        <nav class="navbar navbar-expand-sm nav w-100">
+            <div class="container-fluid mx-md-4 mx-lg-5">
+                <a class="navbar-brand ms-lg-2" href="index.html">
+                    <img src="images/travelgpt.png" alt="Logo" style="height:80px; width:auto;">
+                </a> 
+                <h1 class="home-title">Intelligent TravelGPT</h1>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown"> 
+                    <ul class="navbar-nav ms-auto">                             
+                        <li class="nav-item">
+                            <a class="nav-link me-4" href="contact.html">Contact Us</a>
+                            <a class="nav-link me-4" href="contact.html"><i class="fas fa-dollar-sign"></i>CAD</a>
+                            <a class="nav-link me-4" href="contact.html">Sign In</a>
+                            <a class="nav-link me-4" href="contact.html">Register</a>
+                        </li>  
+                    </ul>  
+                </div> 
+            </div> 
+        </nav>  
+    </div>  
+
+    <!-- Header content -->
+    <div class="container my-2">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center">
+                <img src="images/picture-travel-bag.jpg" alt="Travel illustration" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <p class="welcome text-uppercase fw-bold" style="font-size:1.8rem; color:#2c3e50; margin:0;">Welcome to TravelGPT</p>
+                <h3 style="margin:0; color:#2c3e50;">We care about your trip</h3>
+                <p style="line-height:1.6; color:#2c3e50; margin:0;">
+                    ✨ Trusted by travelers, designed for you.<br><br>
+                    We believe every journey should be <strong>beautiful, convenient, and worry-free</strong>. 
+                    Our intelligent trip planner combines smart AI with real traveler insights to create personalized itineraries, 
+                    optimize budgets, and suggest the best experiences — all with your comfort in mind.<br><br>
+                    Sit back, relax, and let us make your trip unforgettable. 🌍✈️
+                </p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ===== SECOND SECTION ===== -->
+<!-- <section class="section-padding no-gap" style="background-color:#2c3e50; color:white;">
+    <div class="container text-center">
+        <h2 style="font-family: 'Georgia', serif;">Our team speaks multiple languages to help you feel at home.</h2>
+        <div class="my-3">
+            <a href="contact.html" class="btn btn-sm fs-5 mx-2" style="background-color:#2980b9; color:white;">Contact Us</a>
+            <a href="booking.html" class="btn btn-sm fs-5 mx-2" style="background-color:goldenrod; color:white;">Book Online</a>
+        </div>
+    </div>
+</section> -->
+
+<!-- ===== CAROUSEL SECTION ===== -->
+<section class="section-padding"  style="background-color:#ebebf1;">
+    <div class="container">
+        <h3 class="fade-in-scale-header text-uppercase text-center fw-bold" style="color: #2c3e50; background-color: rgb(235, 235, 241);">
+                Enjoy Services for your trip
+            </h3>
+        <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-12 col-md-3 mb-4">
+                            <div class="card clickable-card servicecard_hover">
+                                <img src="images/trip-plan1.jpg" class="card-img-top" alt="Smart itineraries">
+                                <div class="card-body">
+                                    <h3 class="card-title">Smart itineraries</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 mb-4">
+                            <div class="card clickable-card servicecard_hover">
+                                <img src="images/budget2.jpg" class="card-img-top" alt="Budget Optimization">
+                                <div class="card-body">
+                                    <h3 class="card-title">Budget Optimization</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 mb-4">
+                            <div class="card clickable-card servicecard_hover">
+                                <img src="images/sentiment2.jpeg" class="card-img-top" alt="Sentiment Insights">
+                                <div class="card-body">
+                                    <h3 class="card-title">Sentiment Insights</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 mb-4">
+                            <div class="card clickable-card servicecard_hover">
+                                <img src="images/language.jpeg" class="card-img-top" alt="Language Buddy">
+                                <div class="card-body">
+                                    <h3 class="card-title">Language Buddy</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+    </div>
+</section>
+
+    <section class="my-3">
+        <div class="container">
+            <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                <h3 class="text-left fw-bold mt-5">Recommendations (Find things to do by interest)</h3> 
+                
+                    <div class="carousel-inner my=2">
+    
+                        <!-- Slide 1 -->
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-md-4 border border-0">
+                                    <div class="card border border-0">
+                                        <img src="images/lake-louise.jpg" class="card-img-top " alt="Image 1">
+                                        <h5 class="card-title text-center my-3 fw-semibold">Calgary</h5> 
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card border border-0">
+                                        <img src="images/banff.jpg" class="card-img-top " alt="Image 1">
+                                        <h5 class="card-title text-center my-3 fw-semibold">Banff</h5>
+                                         
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card border border-0">
+                                        <img src="images/jasper.jpg" class="card-img-top " alt="Image 1">
+                                        <h5 class="card-title text-center my-3 fw-semibold">Jasper</h5>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+        
+                        <!-- Slide 2 -->
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card border border-0">
+                                        <img src="images/lake_louise_credit_finn_beales_0.webp" class="card-img-top " alt="Image 1">
+                                        <h5 class="card-title text-center my-3 fw-semibold">Finn Beales</h5> 
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card border border-0">
+                                        <img src="images/lake-louise.jpg" class="card-img-top " alt="Image 1"> 
+                                        <h5 class="card-title text-center my-3 fw-semibold">Lake Louise</h5> 
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card border border-0">
+                                        <img src="images/alberta2.jpg" class="card-img-top " alt="Image 1">
+                                        <h5 class="card-title text-center my-3 fw-semibold">Alberta</h5> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div> 
+
+                <!-- Controls -->
+                <!-- <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button> -->
+    
+                <!-- Indicators -->
+                <!-- <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+     <section>
+        <div class="container ">
+            <h2 class="text-center fw-bold my-3">What Our Clients Say</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card border border-0">
+                        <!-- <img src="images/doctor2.jpg" alt="Customer Photo" class="customer-photo mx-auto mb-3"> -->
+                        <h5 class="card-title my-3 mx-3"><b>Sarah M., Toronto</b></h5>
+                        <p class="card-text mx-3 text-muted">"TravelGPT completely transformed the way I plan my trips! The smart itinerary feature saved me hours of research, and the suggestions were spot-on for my preferences. I felt like I had a personal travel assistant guiding me at every step. The budget optimization tips were especially helpful, letting me enjoy more experiences without overspending. I’ve already recommended it to all my friends”</p>
+                        <div class="star-rating mb-2 ms-3">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <p class="text-muted ms-3">5 out of 5 stars</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border border-0">
+                        <!-- <img src="images/doctor2.jpg" alt="Customer Photo" class="customer-photo mx-auto mb-3"> -->
+                        <h5 class="card-title my-3 mx-3"><b>Daniel K., Vancouver</b></h5>
+                        <p class="card-text mx-3 text-muted">"I was impressed by how TravelGPT combined AI recommendations with real traveler insights. The suggested activities were unique and tailored to my interests. Planning a family vacation is usually stressful, but the platform made it smooth and enjoyable. I loved the sentiment insights feature—it really helped me pick destinations and experiences that matched our vibe perfectly.”</p>
+                        <div class="star-rating mb-2 ms-3">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <p class="text-muted ms-3">5 out of 5 stars</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border border-0">
+                        <!-- <img src="images/doctor2.jpg" alt="Customer Photo" class="customer-photo mx-auto mb-3"> -->
+                        <h5 class="card-title my-3 mx-3 fw-bolder">Priya S., Montreal</h5>
+                        <p class="card-text mx-3 text-muted">“TravelGPT is a game-changer for solo travelers like me. The app not only helped me design a complete itinerary but also offered language support tips and local recommendations that I would have missed otherwise. The interface is user-friendly, the suggestions are smart, and I felt confident exploring new places knowing everything was well-planned. Truly an indispensable tool for any traveler!”</p>
+                        <div class="star-rating mb-2 ms-3">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <p class="text-muted ms-3">5 out of 5 stars</p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </section>
+
+    <footer class="container-fluid text-white my-3" style="background-color: #2c3e50;">
+        <div class="container py-5 text-white">
+            <div class="row">
+                <h4 class="fw-bolder">About TravelGPT</h4>
+                <p class="fs-6">Founded with the vision to simplify travel planning, TravelMate AI started as a small project in 2020 to help travelers create personalized itineraries effortlessly. Today, our platform serves thousands of travelers worldwide, offering smart AI-powered trip planning, budget optimization, and personalized recommendations. With a team dedicated to making every journey seamless and enjoyable, TravelMate AI continues to innovate, ensuring your trips are stress-free, memorable, and tailored just for you.</p>
+            </div>
+            <hr class="ms-lg-2">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <span>GET IN TOUCH</span> <br>   
+                    <hr class="w-25">                     
+                    <span class="opacity-50">WHATSAPP</span><br>
+                    <span>(+1)523-428-4569</span><br> <br>   
+                    <span class="opacity-50">EMAIL</span><br>
+                    <span>enquiries@travelmateai.com</span><br> <br>   
+                    <span class="opacity-50">BUSINESS HOURS</span><br>
+                    <span>Open 24 hours, Mon to Sun</span><br>
+                    <p>
+                        <i class="fa-brands fa-square-facebook fa-3x"></i>
+                        <i class="fa-brands fa-square-github fa-3x mx-2"></i>
+                        <i class="fa-brands fa-linkedin fa-3x mx-2"></i>
+                        <i class="fa-brands fa-square-instagram  fa-3x mx-2"></i>
+                    </p> 
+                </div>
+                
+                <div class="col-12 col-md-6 col-lg-3">
+                    <span >OUR SERVICES</span> <br> 
+                    <hr class="w-25">     
+                    <a href="" class="d-block text-decoration-none text-secondary footer_a_hover">Smart Itineraries</a>
+                    <a href="" class="d-block text-decoration-none text-secondary footer_a_hover">Budget Optimization</a> 
+                    <a href="" class="d-block text-decoration-none text-secondary footer_a_hover">Sentiment Insights</a>
+                    <a href="" class="d-block text-decoration-none text-secondary footer_a_hover">Language Buddy</a>  
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <span >CORPORATE</span> <br> 
+                    <hr class="w-25">     
+                    <a href="" class="d-block text-decoration-none text-secondary footer_a_hover">Trip Advisor</a><br> 
+                    <span>CONTACT US</spanss=><br>  
+                    <hr class="w-25">
+                    <a href="" class="d-block text-decoration-none text-secondary footer_a_hover">Book an appointment</a>
+                    <a href="" class="d-block text-decoration-none text-secondary footer_a_hover">Enquiries and Feedback</a> 
+                </div> 
+            </div>
+        </div> 
+    </footer>
+
+<script src="Bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

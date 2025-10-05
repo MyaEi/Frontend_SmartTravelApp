@@ -1,0 +1,1217 @@
+/* @font-face{
+    /* font-family: "Roboto"; c
+    src: url('../Roboto/Roboto-Regular.ttf');
+   
+} */
+
+*{
+    font-family: "Roboto";
+}
+.body_css{
+    background-color:aliceblue;
+}
+
+/*nav start*/
+.home-title{
+    font-family: 'Arial', sans-serif; 
+    font-size:x-large;
+    font-weight: bold;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    display: inline-block; 
+}
+.home-title:hover {
+    color: #3498db;
+    text-decoration: underline;
+}
+
+
+.active_page{
+    /* color: rgba(0, 13, 255, 0.579) !important; */
+    color:#0000cc !important;
+}
+
+.dropdownitemHover:hover{
+    background-color: rgb(113, 111, 111) !important;
+    color: rgb(62, 3, 241) !important;
+}
+.dropdown-item:hover {
+    background-color: #f0ad4e;  
+}
+
+.nav{
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    color:#2c3e50 !important;
+    font-family: 'Georgia', serif !important;
+    font-size:large;
+} 
+
+.nav_div{
+    /* position: absolute;
+    top: 20px;
+    left: 40px; 
+    font-size: small; 
+    background-color:transparent!important;  */
+    width: 100%;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 20%;    */
+    /* color:#042a53 !important; */
+}
+.hotline_service{
+    margin-top: 3px;
+    /* margin-left: 2500px; */
+    float: inline-end;
+}
+
+/*----START nav bar afffect------------*/
+.navbar { 
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar li {
+    display: inline-block;
+  }
+  
+  .navbar a {
+    /* color: rgba(9, 9, 9, 0.94); */
+    color: #2c3e50;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: large;
+  }
+  
+  .navbar a:hover {
+    background-color: #2c3e50;
+    border-radius: 5px;
+    color: white;
+    text-decoration: solid;
+  }
+  
+  @media (min-width: 992px) {
+    /* Apply the rounded-pill style on screens 992px and wider (laptop and larger) */
+    .navbar {
+      border-radius: 50px;
+    }
+  
+    .navbar a {
+      border-radius: 50px;
+    }
+  }
+  /* For phone screens */
+  /* @media (max-width: 575.98px) {
+    .navbar {
+        border-radius: 20px; /* Reduced margin for phone-sized screens  
+    } */
+
+   /*navbar submenu effect*/
+   /* Dropdown menu styling */
+#dropdown_submenu1 {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#dropdown_submenu1.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Columns inside the dropdown */
+#dropdown_submenucolumn1 {
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    flex: 1;
+    padding: 1rem;
+    min-width: 150px;
+    box-sizing: border-box;
+}
+
+/* Dropdown items */
+.dropdown-item {
+    white-space: nowrap;
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333; /* Text color */
+    text-decoration: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5; /* Background color on hover */
+    color: #007bff; /* Text color on hover */
+}
+
+/* Column titles */
+.dropdown-item-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Keyframe animation for slide-in effect */
+@keyframes slideIn {
+    from {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+  /*----END nav bar afffect------------*/
+
+/*-----start header titile home page*/ 
+.shadow-text {
+    font-size: 18px;
+    color: #333;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Text shadow */
+}
+ .classic-smart-text {
+    font-size: 20px;
+    color: #2c3e50; /* Classic dark blue color  */
+    letter-spacing: 1.5px; /* Slightly increased letter spacing for elegance  */
+    text-transform: uppercase; /* Uppercase text for a strong, classic look  */
+    border-bottom: 2px solid #2c3e50; /* Underline with border for a bold effect  */
+     
+    padding-bottom: 5px;
+    position: relative;
+    margin-bottom: 20px;display: inline-block; /* Ensure the border is only as wide as the text */
+} 
+
+.classic-smart-text::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 50px;
+    height: 3px;
+    background-color: #2c3e50; /* A smart accent color */
+}
+
+.classic-smart-text:hover {
+    color: #2c3e50;/* Accent color on hover */
+    border-bottom-color: #2c3e50; /* Change underline color on hover */
+}  
+.booking-button {
+    margin-top: 27px; /* Default margin-top for larger screens */
+    margin-left: 0px;
+}
+.meetdoc-button {
+    margin-top: 27px; /* Default margin-top for larger screens */
+}
+.secondwelcometitle{
+    display: none;
+}
+.welcome, .onestop, .wecare{
+    display: block;
+}
+/* For phones in portrait and landscape (max-width: 575.98px) */
+@media (max-width: 575.98px) {
+    .secondwelcometitle{
+        margin-top: 250px;
+        display: block; 
+    }
+    .booking-button {
+        margin-top: 10px; /* Reduced margin-top for small phones */
+    }
+    .meetdoc-button {
+        margin-top: 10px; /* Reduced margin-top for small phones */
+    } 
+    .welcome, .onestop, .wecare{
+        display: none;
+    }
+}
+
+/* For tablets and small desktops (min-width: 576px) and (max-width: 991.98px) */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .secondwelcometitle{
+        margin-top: 200px;
+        display: block;
+    }
+    .booking-button {
+        margin-top: 10px; /* Adjusted margin-top for tablets */
+    }
+    .meetdoc-button {
+        margin-top: 10px; /* Reduced margin-top for small phones */
+    }
+    .welcome, .onestop, .wecare{
+        display: none;
+    } 
+}
+@media (min-width: 992px) {
+    /* Styles for laptops and larger screens */
+    .sendwelcometitle{ 
+        display: none;
+    }
+    .welcome, .onestop, .wecare{
+        display: block;
+    }
+}
+@media (min-width: 1200px) {
+    /* Styles for large desktops */
+    .sendwelcometitle{ 
+        display: none;
+    }
+    .welcome, .onestop, .wecare{
+        display: block;
+    }
+}
+/*-----end header titile home page*/
+
+/*---start home page slide in header*/
+/* Header Style */ 
+  .fade-in-scale-header {
+    background-color:#C0C0C0;/* Background color */
+    color: #fff; /* Text color */
+    padding: 20px;
+    font-size: 2em;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: fadeInScale 1.5s ease-out forwards; /* Adjust duration as needed */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Animation Keyframes */
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+/*---end home page slide in header*/
+
+/*start home page carousel*/
+.banner_text{
+    top:25%;
+    left:10%;  
+}
+.homepage_image{
+    width: 100%;
+    height: 90%;
+}
+
+/*end home page carousel*/
+
+/* start -- Service all header animation slide*/
+.slide-in-serviceall_header {
+    position: absolute;
+    top: 120px;
+    left: 40px; 
+    padding: 20px;  
+    /* width: 100%;
+    height: 300px; */
+    background-image: url('../../public/capstone/images/banff.jpg');
+    background-size: cover;
+    background-position: center;
+    transform: translateY(-100%);
+    animation: slideIn 1.5s ease-out forwards;
+    font-family: 'Georgia', serif !important;
+    color: #000066;
+    
+    font-size:xx-large;
+    text-transform: uppercase; 
+    font-weight: bold;  
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+  } 
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+/* end -- Service all header animation slide*/
+
+.allservice_header{
+    background-color:#e6f9ff ;
+    /* top:15%;
+    left:5%; */
+    top: 160px;
+    left: 50px; 
+}
+.allservice_title{
+    position: absolute;
+    top: 140px;
+    left: 40px;
+    color: white;
+    padding: 20px;  
+}
+.service_card{
+    display: block;
+    width: 90%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+/*-------------------------------------------------------------start Services-----------------------------------------------*/ 
+/* Container for each card */
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Style for the image */
+.card-img-top {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+
+/* Overlay effect */
+.servicecard_hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(2, 2, 130, 0.8); /* carousel card item background Blue color with opacity */  
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+/* Centered text */
+.card-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 2;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Show overlay and text on hover */
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover .card-body {
+    opacity: 1;
+    color: white;
+} 
+ 
+/* Custom styles for carousel indicators */
+.carousel-indicators [data-bs-target] {
+    background-color: black; /* Change dot color */
+    width: 40px;
+    height: 40px;
+    border-radius: 1500%; /* Circular shape */
+     
+    border: none; /* Remove default border */
+}
+.carousel-item img{
+    border: none;/* Removes any border around the image */
+    box-shadow: none; /* Removes any shadow that might look like a border */
+}
+
+.carousel-indicators .active {
+    background-color: rgb(3, 3, 3); /* Color for the active indicator */
+} 
+.allservice-btn{
+    margin-left: 43%; 
+    color: white;
+}
+/* Hover effects */
+.btn-custom:hover {
+    background-color: #cc3300; /* Darker background color */
+    transform: scale(1.1); /* Slightly enlarge the button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+.btn-curtain {
+    position: relative;
+    overflow: hidden;
+    background-color: #04a71f;
+    color: white;
+    border: none;
+    /* padding: 10px 20px; */
+    border-radius: 5px;
+    font-size: 50px;
+    /* text-transform: uppercase; */
+    transition: color 0.3s ease;
+    z-index: 1; 
+}
+
+.btn-curtain::before, .btn-curtain::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background-color:#04a71f;
+    color: white;
+    transition: transform 0.6s ease;
+    z-index: -1;
+}
+
+.btn-curtain::before {
+    left: -50%;
+    transform: translateX(0);
+}
+
+.btn-curtain::after {
+    right: -50%;
+    transform: translateX(0);
+    color: white; 
+}
+
+.btn-curtain:hover::before {
+    transform: translateX(100%);
+    background-color: #04a71f;
+    color: white; 
+}
+
+.btn-curtain:hover::after {
+    transform: translateX(-100%);
+    background-color: #04a71f;
+    color: white; 
+}
+
+.btn-curtain:hover { 
+    color: white !important; /* Change text color on hover */
+} 
+
+/*start - meet the UHC Team button color animation*/
+.btn-meetUHC {
+    position: relative; 
+    overflow: hidden;
+    background-color:  #DAF7A6 ; 
+    color: white;
+    border: none;
+    /* padding: 10px 20px; */
+    border-radius: 5px;
+    font-size: 50px;
+    /* text-transform: uppercase; */
+    transition: color 0.3s ease;
+    z-index: 1; 
+}
+
+.btn-meetUHC::before, .btn-meetUHC::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background-color:#DAF7A6 ; 
+    color: white;
+    transition: transform 0.6s ease;
+    z-index: -1;
+}
+
+.btn-meetUHC::before {
+    left: -50%;
+    transform: translateX(0);
+}
+
+.btn-meetUHC::after {
+    right: -50%;
+    transform: translateX(0);
+    color: white; 
+}
+
+.btn-meetUHC:hover::before {
+    transform: translateX(100%);
+    background-color:#DAF7A6 ;
+    color: white; 
+}
+
+.btn-meetUHC:hover::after {
+    transform: translateX(-100%);
+    background-color: #DAF7A6 ;
+    color: white; 
+}
+
+.btn-meetUHC:hover { 
+    color: white; /* Change text color on hover */
+}
+/*start - meet the UHC Team button color animation*/
+
+#service-pretty-bullets {
+    list-style-type: none;
+    padding-left: 0;
+  }
+#service-pretty-bullets li::before {
+    content: "\f00c"; /* Example: checkmark icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 10px;
+    color: #17a2b8;
+  }
+
+  /*start service pages margin left*/
+ /* Responsive margin-left for different screen sizes */
+ .custom-margin-left {
+    margin-left: 1rem; /* Default for extra small screens */
+    }
+
+    @media (min-width: 576px) { /* Small screens (portrait phones) */
+        .custom-margin-left {
+            margin-left: 2rem;
+        }
+    }
+
+    @media (min-width: 768px) { /* Medium screens (tablets) */
+        .custom-margin-left {
+            margin-left: 3rem;
+        }
+    }
+
+    @media (min-width: 992px) { /* Large screens (desktops) */
+        .custom-margin-left {
+            margin-left: 4rem;
+        }
+    }
+
+    @media (min-width: 1200px) { /* Extra large screens (large desktops) */
+        .custom-margin-left {
+            margin-left: 5rem;
+        }
+    }
+    /*end service pages margin left*/
+
+    /* health-screening_navbar   */
+    .health-screening-navbar { 
+        padding: 10px;
+        text-align: center;
+        width: 80%; /* Control the width of the navbar */
+            max-width: 1200px; /* Set a max-width for larger screens */
+            margin: 0 auto; /* Center the navbar horizontally */
+            border-radius: 50rem; /* Rounded-pill effect */
+            background-color: #2980b9; /* Example background color */
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px; /* Position it a bit below the top of the screen */
+      }
+      
+      .health-screening-navbar  ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .health-screening-navbar  li {
+        display: inline-block; 
+      }
+      
+      .health-screening-navbar  a {
+        /* color: rgba(9, 9, 9, 0.94); */
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: large;
+      }
+      
+      .health-screening-navbar  a:hover {
+        background-color: white;
+        border-radius: 5px;
+        color: #02264b;
+        text-decoration: solid;
+      }
+      
+      @media (min-width: 992px) {
+        /* Apply the rounded-pill style on screens 992px and wider (laptop and larger) */
+        .health-screening-navbar {
+          border-radius: 50px;
+        }
+      
+        .health-screening-navbar {
+          border-radius: 50px;
+        }
+      }
+
+      /*start health screening accordion*/
+      /* Custom styles for the accordion */
+      .accordion {
+        max-width: 800px;
+        margin: 20px auto;
+    }
+    .accordion-item {
+        border: 1px solid #ddd;
+        border-radius: 0.375rem;
+        margin-bottom: 1rem;
+    }
+    .accordion-header {
+        padding: 0.75rem 1.25rem;
+        background-color: #c8deed;
+        color: #2c3e50;
+        cursor: pointer;
+        font-weight: bold;
+        border: none;
+        border-radius: 0.375rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color 0.3s, color 0.3s;
+        display: flex;
+            justify-content: center;
+            align-items: center;
+    }
+    .accordion-header:hover {
+        background-color: #2c3e50;
+        color: white;
+    }
+    .accordion-body {
+        padding: 1.25rem;
+        display: none; /* Hide by default */
+    }
+    .accordion-body.show {
+        display: block; /* Show when expanded */
+    }
+    .toggle-icon {
+        font-size: 0.75rem;
+        transition: transform 0.3s;
+    }
+    .accordion-header.active .toggle-icon {
+        transform: rotate(180deg); /* Rotate icon when expanded */
+    }
+        /*end health screening accordion*/
+
+        .icon-label {
+            display: flex;
+            align-items: center;
+        }
+        .icon-label i {
+            font-size: 2rem; /* Adjust size as needed */
+            margin-right: 0.5rem; /* Spacing between icon and text */
+        }
+        .icon-label span {
+            font-size: 1.25rem; /* Adjust text size as needed */
+        }
+
+       
+
+         /* Change cursor to pointer when hovering over the card */
+         .clickable-card {
+            cursor: pointer;
+        }
+        
+/*-------------------------------------------------------------end Services---------------------------------------------------------*/
+/*-------------------------------------------------------------start separtor section-----------------------------------------------*/
+  
+/* .center-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh; /* Full viewport height 
+    background-color: #02264b;
+    color: white; 
+} */
+.header {
+    margin-bottom: 20px; /* Space between header and buttons */
+}
+.button-container {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    font-size: medium;
+}
+.btn-custom {
+    font-size: 10rem; /* Larger text */
+    padding: 12px 24px; /* Larger button size */
+}
+
+ 
+/*-------------------------------------------------------------end separtor section-------------------------------------------------*/
+/*-------------------------------------------------------------start Doctor section-------------------------------------------------*/
+ 
+ /*Our doctors*/
+
+ /*start - animated header only to show tablet size and above*/
+ /* Default Styles */
+/* Default Styles */
+.animated-header, .animated-paragraph {
+    display: none; /* Hide by default */
+    font-size: 17px;
+  }
+  
+  /* Tablet and above styles */
+  @media (min-width: 768px) {
+    .animated-header, .animated-paragraph {
+      display: block; /* Show on tablet and above */
+    }
+  
+    /* Header Animation */
+    .animated-header {
+      /*background-color: #C0C0C0;  Background color */
+      color: #fff; /* Text color */
+      padding: 10px;
+      text-align: center;
+      /* margin-top: 5px; */
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: headerAnimation 1.5s ease-out forwards; /* Adjust duration as needed */
+    }
+  
+    /* Paragraph Animation */
+    .animated-paragraph {
+      padding: 10px;
+      font-size: 1em;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: paragraphAnimation 1.5s ease-out forwards; /* Adjust duration as needed */
+    }
+  
+    /* Animation Keyframes for Header */
+    @keyframes headerAnimation {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    /* Animation Keyframes for Paragraph */
+    @keyframes paragraphAnimation {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+  /*end  - animated header only to show tablet size and above*/
+
+ .slide-in-meetourdoc_header {
+    position: absolute;
+    top: 380px;
+    left: 5px; 
+    padding: 20px;  
+    /* width: 100%;
+    height: 300px; */
+    background-image: url('../../public/capstone/images/banff.jpg');
+    background-size: cover;
+    background-position: center;
+    transform: translateY(-100%);
+    animation: slideIn 1.5s ease-out forwards;
+    font-family: 'Georgia', serif !important;
+    color: #000066;
+    
+    font-size:xx-large;
+    text-transform: uppercase; 
+    font-weight: bold;  
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+  } 
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+.card-button {
+    position: absolute;
+    bottom: 5px; /* Position 20px from the bottom of the card */
+    left: 50%;
+    transform: translateX(-50%); /* Center the button horizontally */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .card-button:hover {
+    background-color: #0056b3;
+  }
+   
+@keyframes colorChange {
+    0% { color: red; }
+    50% { color: blue; }
+    100% { color: green; }
+} 
+ 
+.margin_left{
+    margin-left: 60px;
+}
+.meetourdoc_div {
+    /* font-family: 'Georgia', serif; /* A classic serif font */
+    /* color: #333;
+    font-size: 2.5em;
+    background-color: #516bc476; */
+    width: 100%; height: 20%;
+    
+    /* color: rgb(11, 9, 9); 
+    margin-left: 60px; */  
+}
+.meetourdoc_h1{
+    font-family: 'Georgia', serif;
+    color: #000066;
+    font-size: 2em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+    font-weight: 700; /* Adjust the weight as needed */
+    text-transform: uppercase; /* For a bold, uppercase look */
+    letter-spacing: 2px; /* Adjust spacing between letters */
+    /* margin-left: 40px; */
+    
+}
+.ourdoctors_bgcolor{
+    background-color: #e6f9ff !important;
+}
+.readmore:hover{
+    background-color: #0000ff;
+}
+.advanced-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+.advanced-button:hover {
+    background-color: #218838;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+.doc_header_div{  
+    height: 5vh; /* Full viewport height */
+    background-color: #2c3e50;
+    color: white; 
+    
+}
+.doc_header{
+    margin-left: 90px; 
+    font-size:24px;
+    display: block;
+    
+}
+.nav-pills .nav-link {
+    border-radius: 50px; /* Rounded-pill style */
+    transition: background-color 0.3s ease;
+}
+
+.content-container {
+    display: none; /* Hide all containers initially */
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+/* .nav-pills .nav-link:hover {
+    background-color: white;
+    color: #02264b;
+} */
+#doc_navbar a{
+    color:white; 
+}
+#doc_navbar {
+    width: 480px;
+}
+#container1, #container2, #container3{
+    width: 800px; 
+    font-size: 17px;
+    border:none;
+}
+.content-container {
+    display: none; /* Hide all containers initially */
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+/* #doc_bookingbtn{
+    margin-top: -10px;
+} */
+.btn-meetdoc {
+    position: relative; 
+    overflow: hidden;
+    background-color:  #FFC300 ; 
+    color: white;
+    border: none;
+    /* padding: 10px 20px; */
+    border-radius: 5px;
+    font-size: 50px;
+    /* text-transform: uppercase; */
+    transition: color 0.3s ease;
+    z-index: 1; 
+}
+
+.btn-meetdoc::before, .btn-meetdoc::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background-color:#FFC300 ;
+    color: white;
+    transition: transform 0.6s ease;
+    z-index: -1;
+}
+
+.btn-meetdoc::before {
+    left: -50%;
+    transform: translateX(0);
+}
+
+.btn-meetdoc::after {
+    right: -50%;
+    transform: translateX(0);
+    color: white; 
+}
+
+.btn-meetdoc:hover::before {
+    transform: translateX(100%);
+    background-color:#FFC300 ;
+    color: white; 
+}
+
+.btn-meetdoc:hover::after {
+    transform: translateX(-100%);
+    background-color: #FFC300 ;
+    color: white; 
+}
+
+.btn-meetdoc:hover { 
+    color: white; /* Change text color on hover */
+}
+
+/*-------------------------------------------------------------end Doctor section---------------------------------------------------*/
+/*-------------------------------------------------------------start Review---------------------------------------------------------*/
+.star-rating {
+    color: #ffc107;
+}
+/* .review-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+.review-card:hover {
+    transform: translateY(-10px);
+} */
+.customer-photo {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+/* .review_text{
+    font-family: Arial, Helvetica, sans-serif !important;
+} */
+/*-------------------------------------------------------------end Review-----------------------------------------------------------*/
+
+
+
+/*-------------------------------------------------------------start Footer-----------------------------------------------------------*/
+.footer_a_hover:hover{
+    color: white !important; 
+}
+
+/*-------------------------------------------------------------end Footer-------------------------------------------------------------*/
+
+/*-------------------------------------------------------------Start Booking appointment----------------------------------------------*/
+.bookingbody_css{
+    background-color:aliceblue;  
+} 
+.bookingheader_div{
+    /* position: absolute;
+    top: 20px;
+    left: 40px; 
+    font-size: small; 
+    background-color:transparent!important;  */ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 20%;    */
+    /* color:#042a53 !important; */
+}
+.form-container{
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: aliceblue;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: "Roboto";
+    font-size: large;
+}
+
+/*-------------------------------------------------------------End Booking appointment----------------------------------------------*/
+/*-------------------------------------------------------------START About Us-------------------------------------------------------*/
+#sharedvalue-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 80%; /* As specified by w-80 class */
+    height: 40%; /* As specified by h-40 class */
+    margin: auto; /* Center the container itself if needed */
+    position: relative;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.awardimage-slider {
+    overflow: hidden; /* Hide the overflow to ensure only the row of images is visible */
+    width: 90%; /* Adjust the width of the slider container */
+    margin: 0 auto; /* Center the slider container within its parent */
+    position: relative;
+}
+
+.awardimage-track {
+    display: flex; /* Display images in a row */
+    width: 170%; /* Double the width to accommodate the duplicated images */
+    animation: scroll 20s linear infinite; /* Apply the scrolling animation */
+}
+
+.awardimage-track img {
+    width: 10%; /* Set each image to take up 10% of the width of the .image-track */
+    height: auto;
+    flex-shrink: 0; /* Prevent images from shrinking */
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/*-------------------------------------------------------------End About Us---------------------------------------------------------*/
+/*-------------------------------------------------------------START Contact Us-----------------------------------------------------*/
+.contactus_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; /* Full viewport height */
+    background-color: #02264b;
+    color: white; 
+}
+
+/* Address/Phone icon Margin Left */
+.icon_marginleft { 
+    margin-left: 40px; /* Default for phones */
+}
+
+
+
+/* Address Text Font Sizes */
+.address-text {
+    font-size: 1.5rem; /* Default for phones */
+    margin-left: 10px;
+}
+
+@media (min-width: 576px) {
+    .address-text {
+        font-size: 1.5rem; /* For tablets */
+        margin-left: 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .address-text {
+        font-size: 1.5rem; /* For laptops and larger screens */
+        margin-left: 20px;
+    }
+}
+
+/* Phone Text Font Sizes */
+.phone-text {
+    font-size: 1.5rem; /* Default for phones */
+}
+
+@media (min-width: 576px) {
+    .phone-text {
+        font-size: 1.5rem; /* For tablets */
+    }
+}
+
+@media (min-width: 992px) {
+    .phone-text {
+        font-size: 1.5rem; /* For laptops and larger screens */
+    }
+}
+
+#contactform{
+    border: none;
+    margin-left: 40px;
+}
+.custom-placeholder::placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 5px;
+    transform: translate(0, 0); /* Ensure it's positioned correctly */
+    font-size: large; /*  Adjust the font size if needed */
+    /*color: #888;  Customize the color of the placeholder */
+    padding-left: 4px; /* Add padding to match the input field */
+    padding-top: 4px; /* Add padding to position it inside the input */
+}
+
+.custom-placeholder {
+    padding-top: 16px; /* Adjust padding to allow room for the placeholder */
+    padding-left: 4px; /* Adjust padding to match the placeholder */
+    box-sizing: border-box; /* Ensure padding doesn’t affect the size */
+    height: 150px; /* Adjust height as needed */
+    width: 100%;
+}
+
+.custom-input {
+    width: 100%; /* Makes the input take up the full width of the parent */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+.checkbox-container {
+    display: flex;
+    align-items: flex-start; /* Aligns the checkbox with the first line */
+  }
+  
+  .checkbox-container input[type="checkbox"] {
+    margin-top: 0.5em; /* Adjust this value to position the checkbox exactly where you want it */
+  }
+  
+  .checkbox-container label {
+    margin-left: 0.5em;
+  }
+  
+
+/*-------------------------------------------------------------End Contact Us--------------------------------------------------------*/
