@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -43,12 +44,12 @@ export default function Hero() {
               <div className="carousel-item active">
                 <div className="row">
                   <div className="col-12 col-md-3 mb-4">
-                    <div className="card clickable-card servicecard_hover">
+                    <Link href="/smart-itineraries" className="card clickable-card servicecard_hover text-decoration-none">
                       <img src="/capstone/images/trip-plan1.jpg" className="card-img-top" alt="Smart itineraries" />
                       <div className="card-body">
                         <h3 className="card-title">Smart itineraries</h3>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                   <div className="col-12 col-md-3 mb-4">
                     <div className="card clickable-card servicecard_hover">
