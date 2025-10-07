@@ -40,7 +40,7 @@ export default function Navbar({ loginUrl, signupUrl }: Props) {
         <Link className="navbar-brand ms-lg-2" href="/">
           <Image src="/capstone/images/travelgpt.png" alt="Logo" width={120} height={80} />
         </Link>
-        <h1 className="home-title m-0">Intelligent TravelGPT</h1>
+        <h1 className="home-title m-0">Smart TravelGPT</h1>
 
         <button
           className="navbar-toggler"
