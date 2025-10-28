@@ -44,7 +44,7 @@ export default function Hero() {
               <div className="carousel-item active">
                 <div className="row">
                   <div className="col-12 col-md-3 mb-4">
-                    <Link href="/smart-itineraries" className="card clickable-card servicecard_hover text-decoration-none">
+                    <Link href="/smart-itineraries/search" className="card clickable-card servicecard_hover text-decoration-none">
                       <img src="/capstone/images/trip-plan1.jpg" className="card-img-top" alt="Smart itineraries" />
                       <div className="card-body">
                         <h3 className="card-title">Smart itineraries</h3>
