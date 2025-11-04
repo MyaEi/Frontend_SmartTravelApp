@@ -5,9 +5,11 @@ import styles from "./itinerary.module.css";
 import { useSearchParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Slider from "react-slick";
+import { useRouter } from "next/navigation";
 
 // ---------- Types matching the response ----------
 type Place = {
+  place_id: string;
   name: string;
   address: string;
   lat: number;
@@ -16,6 +18,7 @@ type Place = {
   user_ratings_total: number | null;
   price_level: number | null; // 0..4 (or null)
   types: string[];
+  photo_urls: any[];
 };
 
 type PlanDay = {
@@ -33,6 +36,21 @@ type ApiResponse = {
   kid_friendly: boolean;
   itinerary_text: string;
   plan_struct: PlanDay[];
+};
+
+type SentimentResponse = {
+  place_id: string;
+  num_reviews: number;
+  summary: string;
+  avg_score: number;
+  positive_ratio: number;
+  keywords: string[];
+  human_summary: string;
+  samples: {
+    text: string;
+    label: string;
+    score: number;
+  }[];
 };
 
 // ---------- Helpers ----------
@@ -108,90 +126,246 @@ function PlaceCard({ p }: { p: Place }) {
     adaptiveHeight: true,
   };
 
+  // --- Sentiment UI state ---
+  const [sentiment, setSentiment] = useState<SentimentResponse | null>(null);
+  const [sentLoading, setSentLoading] = useState(false);
+  const [sentErr, setSentErr] = useState<string | null>(null);
+  const [showSentModal, setShowSentModal] = useState(false);
+
+  const handleOpenReviews = async () => {
+    setShowSentModal(true);
+
+    // already loaded or loading → don’t refetch
+    if (sentiment || sentLoading) return;
+
+    setSentLoading(true);
+    setSentErr(null);
+
+    try {
+      const res = await fetch(
+        `/api/sentiment?place_id=${encodeURIComponent(p.place_id)}`
+      );
+      if (!res.ok) {
+        const msg = await res.text();
+        throw new Error(msg || `HTTP ${res.status}`);
+      }
+      const json: SentimentResponse = await res.json();
+      setSentiment(json);
+    } catch (e: any) {
+      setSentErr(e.message || "Failed to load review insights");
+    } finally {
+      setSentLoading(false);
+    }
+  };
+
   return (
-    <div className={styles.card}>
-      {/* --- Photo Section --- */}
-      {/* --- Carousel Section --- */}
-      {photos.length > 0 && (
-        <div className={styles.carouselWrap}>
-          <Slider {...settings}>
-            {photos.map((url, idx) => (
-              <div key={idx} className={styles.slide}>
-                <img
-                  src={`/api/photo-proxy?url=${encodeURIComponent(url)}`}
-                  alt={`${p.name} photo ${idx + 1}`}
-                  className={styles.slideImg}
-                  loading="lazy"
-                />
-              </div>
+    <>
+      <div className={styles.card}>
+        {/* --- Carousel Photo Section --- */}
+        {photos.length > 0 && (
+          <div className={styles.carouselWrap}>
+            <Slider {...settings}>
+              {photos.map((url, idx) => (
+                <div key={idx} className={styles.slide}>
+                  <img
+                    src={`/api/photo-proxy?url=${encodeURIComponent(url)}`}
+                    alt={`${p.name} photo ${idx + 1}`}
+                    className={styles.slideImg}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
+        )}
+
+        <div className={styles.cardHeader}>
+          <h3 className={styles.cardTitle}>{p.name}</h3>
+
+          <div className={styles.ratingWrap}>
+            {typeof p.rating === "number" ? (
+              <>
+                <svg
+                  viewBox="0 0 24 24"
+                  className={styles.starIcon}
+                  aria-hidden="true"
+                >
+                  <path d="M12 17.3l6.18 3.7-1.64-7.03L21 9.24l-7.19-.61L12 2 10.19 8.63 3 9.24l4.46 4.73L5.82 21z" />
+                </svg>
+                <span className={styles.ratingNum}>{p.rating.toFixed(1)}</span>
+                {p.user_ratings_total ? (
+                  <span className={styles.ratingCount}>({p.user_ratings_total})</span>
+                ) : null}
+              </>
+            ) : (
+              <span className={styles.badgeMuted}>No rating</span>
+            )}
+            <span className={styles.priceBadge}>{priceTo$(p.price_level)}</span>
+          </div>
+        </div>
+
+        <div className={styles.addrRow}>{p.address}</div>
+
+        {tags.length > 0 && (
+          <div className={styles.tagRow}>
+            {tags.map((t) => (
+              <span key={t} className={styles.tag}>
+                {t}
+              </span>
             ))}
-          </Slider>
+          </div>
+        )}
+
+        {/* Inline row with button */}
+        <div className={styles.sentimentInline}>
+          <button
+            type="button"
+            className={styles.sentimentLink}
+            onClick={handleOpenReviews}
+          >
+            {sentiment
+              ? "See what travelers are saying"
+              : "Discover review highlights for this place"}
+          </button>
         </div>
-      )}
 
-      <div className={styles.cardHeader}>
-        <h3 className={styles.cardTitle}>{p.name}</h3>
+        <div className={styles.actionsRow}>
+          <a
+            className={styles.btnOutline}
+            href={mapsSearch(p)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open in Maps
+          </a>
+          <a
+            className={styles.btnGhost}
+            href={mapsDir(p)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Directions
+          </a>
+          <button
+            type="button"
+            className={styles.btnGhost}
+            onClick={() => navigator.clipboard.writeText(p.address)}
+          >
+            Copy address
+          </button>
+        </div>
+      </div>
 
-        <div className={styles.ratingWrap}>
-          {typeof p.rating === "number" ? (
-            <>
-              <svg
-                viewBox="0 0 24 24"
-                className={styles.starIcon}
-                aria-hidden="true"
+      {/* Modal – content depends on loading / error / data */}
+      {showSentModal && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setShowSentModal(false)}
+        >
+          <div
+            className={styles.modal}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* HEADER */}
+            <header className={styles.modalHeader}>
+              <div>
+                <p className={styles.modalEyebrow}>Review insights</p>
+                <h3 className={styles.modalTitle}>{p.name}</h3>
+              </div>
+              <button
+                type="button"
+                className={styles.modalClose}
+                onClick={() => setShowSentModal(false)}
+                aria-label="Close"
               >
-                <path d="M12 17.3l6.18 3.7-1.64-7.03L21 9.24l-7.19-.61L12 2 10.19 8.63 3 9.24l4.46 4.73L5.82 21z" />
-              </svg>
-              <span className={styles.ratingNum}>{p.rating.toFixed(1)}</span>
-              {p.user_ratings_total ? (
-                <span className={styles.ratingCount}>({p.user_ratings_total})</span>
-              ) : null}
-            </>
-          ) : (
-            <span className={styles.badgeMuted}>No rating</span>
-          )}
-          <span className={styles.priceBadge}>{priceTo$(p.price_level)}</span>
-        </div>
-      </div>
+                ✕
+              </button>
+            </header>
 
-      <div className={styles.addrRow}>{p.address}</div>
+            {/* LOADING / ERROR */}
+            {sentLoading && (
+              <p className={styles.modalMuted}>Loading reviews…</p>
+            )}
+            {sentErr && !sentLoading && (
+              <p className={styles.modalError}>{sentErr}</p>
+            )}
 
-      {tags.length > 0 && (
-        <div className={styles.tagRow}>
-          {tags.map((t) => (
-            <span key={t} className={styles.tag}>
-              {t}
-            </span>
-          ))}
+            {/* CONTENT */}
+            {sentiment && !sentLoading && !sentErr && (
+              <>
+                {/* SCORE STRIP */}
+                <section className={styles.modalStats}>
+                  <div className={styles.modalStatPrimary}>
+                    <span className={styles.modalStatNumber}>
+                      {sentiment.positive_ratio.toFixed(0)}%
+                    </span>
+                    <span className={styles.modalStatLabel}>positive reviews</span>
+                  </div>
+                  <div className={styles.modalStatItem}>
+                    <span className={styles.modalStatLabel}>Total reviews</span>
+                    <span className={styles.modalStatValue}>
+                      {sentiment.num_reviews}
+                    </span>
+                  </div>
+                  <div className={styles.modalStatItem}>
+                    <span className={styles.modalStatLabel}>Avg score</span>
+                    <span className={styles.modalStatValue}>
+                      {sentiment.avg_score.toFixed(2)}
+                    </span>
+                  </div>
+                </section>
+
+                {/* HUMAN SUMMARY */}
+                <section className={styles.modalSection}>
+                  <h4 className={styles.modalSectionTitle}>Overall vibe</h4>
+                  <p className={styles.modalHumanSummary}>
+                    {sentiment.human_summary}
+                  </p>
+                </section>
+
+                {/* KEYWORDS */}
+                {sentiment.keywords.length > 0 && (
+                  <section className={styles.modalSection}>
+                    <h4 className={styles.modalSectionTitle}>
+                      What people mention
+                    </h4>
+                    <div className={styles.modalKeywords}>
+                      {sentiment.keywords.map((k) => (
+                        <span key={k} className={styles.modalKeyword}>
+                          #{k}
+                        </span>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {/* SAMPLE REVIEWS */}
+                {sentiment.samples?.length > 0 && (
+                  <section className={styles.modalSection}>
+                    <h4 className={styles.modalSectionTitle}>Sample reviews</h4>
+                    <div className={styles.modalSamples}>
+                      {sentiment.samples.map((s, i) => (
+                        <article key={i} className={styles.modalSample}>
+                          <div className={styles.modalSampleMeta}>
+                            <span className={styles.modalSampleLabel}>
+                              {s.label === "POSITIVE" ? "Positive" : s.label}
+                            </span>
+                            <span className={styles.modalSampleScore}>
+                              Score {s.score.toFixed(2)}
+                            </span>
+                          </div>
+                          <p className={styles.modalSampleText}>{s.text}</p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                )}
+              </>
+            )}
+          </div>
         </div>
       )}
-
-      <div className={styles.actionsRow}>
-        <a
-          className={styles.btnOutline}
-          href={mapsSearch(p)}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Open in Maps
-        </a>
-        <a
-          className={styles.btnGhost}
-          href={mapsDir(p)}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Directions
-        </a>
-        <button
-          type="button"
-          className={styles.btnGhost}
-          onClick={() => navigator.clipboard.writeText(p.address)}
-        >
-          Copy address
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 
@@ -201,6 +375,7 @@ export default function SmartItinerariesPage() {
   const [data, setData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
+  const router = useRouter();
 
   // local UI state (kept exactly as you have it)
   const [query, setQuery] = useState("");
@@ -308,6 +483,15 @@ export default function SmartItinerariesPage() {
 
   return (
     <div className={styles.pageWrap}>
+      <div className={styles.backWrap}>
+  <button
+    type="button"
+    className={styles.backBtn}
+    onClick={() => router.back()}
+  >
+    ← Back
+  </button>
+</div>
       {/* Header */}
       <header className={styles.header}>
         <h1 className={styles.title}>

@@ -19,10 +19,7 @@ export async function POST(req: Request) {
     const r = await fetch(`${API_BASE}/itinerary/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // include credentials if your backend needs cookies:
-      // credentials: "include",
       body: JSON.stringify(payload),
-      // don't cache itinerary results
       cache: "no-store",
     });
 

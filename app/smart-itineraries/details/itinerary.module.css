@@ -425,3 +425,258 @@
 .notesContent strong {
   color: #111;
 }
+
+.sentimentInline {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sentimentLink {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.8rem;
+  color: #2563eb;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.sentimentLink:hover {
+  color: #1d4ed8;
+}
+
+.sentimentMuted {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* modal styles (same as before, or tweak as you like) */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  background: #ffffff;
+  max-width: 720px;
+  width: 95%;
+  max-height: 80vh;
+  border-radius: 1rem;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  font-size: 0.95rem;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modalEyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+  margin: 0 0 0.15rem;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.modalClose {
+  border: none;
+  background: #f3f4f6;
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+}
+
+.modalClose:hover {
+  background: #e5e7eb;
+}
+
+.modalMuted {
+  color: #9ca3af;
+}
+
+.modalError {
+  color: #b91c1c;
+}
+
+/* stats strip */
+
+.modalStats {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.75rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 1.25rem;
+}
+
+.modalStatPrimary {
+  border-right: 1px solid #e5e7eb;
+  padding-right: 0.75rem;
+}
+
+.modalStatNumber {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #15803d;
+  line-height: 1.1;
+}
+
+.modalStatLabel {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.modalStatItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modalStatValue {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* sections */
+
+.modalSection {
+  margin-bottom: 1.25rem;
+}
+
+.modalSectionTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.4rem;
+}
+
+.modalHumanSummary {
+  margin: 0;
+  color: #374151;
+  line-height: 1.6;
+}
+
+/* keywords */
+
+.modalKeywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.modalKeyword {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1f2937;
+  font-size: 0.75rem;
+}
+
+/* samples */
+
+.modalSamples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.modalSample {
+  padding: 0.65rem 0.7rem;
+  border-radius: 0.75rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.modalSampleMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.25rem;
+  font-size: 0.78rem;
+}
+
+.modalSampleLabel {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.modalSampleScore {
+  color: #6b7280;
+}
+
+.modalSampleText {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #111827;
+  line-height: 1.5;
+}
+
+/* small screens */
+@media (max-width: 640px) {
+  .modal {
+    padding: 1.25rem 1.1rem;
+  }
+
+  .modalStats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .modalStatPrimary {
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    padding-right: 0;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.backWrap {
+  margin-bottom: 1rem;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.backBtn:hover {
+  color: #1d4ed8;
+  transform: translateX(-2px);
+}

@@ -215,3 +215,25 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.backWrap {
+  margin: 0 0 1rem 0;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.backBtn:hover {
+  color: #1d4ed8;
+  transform: translateX(-2px);
+}

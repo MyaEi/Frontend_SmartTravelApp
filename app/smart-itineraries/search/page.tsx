@@ -34,10 +34,10 @@ export default function SmartItinerariesSearchPage() {
   const [busy, setBusy] = useState(false);
   const [activityTheme, setActivityTheme] = useState<string>("Adventure");
   const budgetToNum: Record<Budget, 1 | 2 | 3> = {
-  "Backpacker": 1,
-  "Mid-range": 2,
-  "Luxury": 3,
-};
+    "Backpacker": 1,
+    "Mid-range": 2,
+    "Luxury": 3,
+  };
 
   // Example suggestions (swap with Places API later if you like)
   const suggestions = useMemo(
@@ -76,19 +76,19 @@ export default function SmartItinerariesSearchPage() {
 
     setBusy(true);
     try {
-        const params = new URLSearchParams({
+      const params = new URLSearchParams({
         destination: destination.trim(),
         days: String(days),
         budget: String(budgetToNum[budget]),
         kid_friendly: kidFriendly === "Yes" ? "true" : "false",
         travel_type: travelType.toLowerCase(),
         activity_theme: activityTheme.toLowerCase(), // single value
-        });
-        router.push(`/smart-itineraries/details?${params.toString()}`);
+      });
+      router.push(`/smart-itineraries/details?${params.toString()}`);
     } finally {
-        setBusy(false);
+      setBusy(false);
     }
-    };
+  };
 
   return (
     <div className={styles.page}>
@@ -99,6 +99,17 @@ export default function SmartItinerariesSearchPage() {
         </p>
       </header>
 
+      {/* Back Button */}
+      <div className={styles.backWrap}>
+        <button
+          type="button"
+          className={styles.backBtn}
+          onClick={() => router.push("/")}
+        >
+          ← Back to Home
+        </button>
+      </div>
+
       <form className={styles.form} onSubmit={onSubmit} noValidate>
         {/* Destination */}
         <div className={styles.field}>
@@ -107,11 +118,10 @@ export default function SmartItinerariesSearchPage() {
           </label>
           <input
             id="dest"
-            className={`${styles.input} ${
-              touched && errors.destination ? styles.inputError : ""
-            }`}
+            className={`${styles.input} ${touched && errors.destination ? styles.inputError : ""
+              }`}
             list="destinations"
-            placeholder="e.g., Waterloo, ON, Canada"
+            placeholder="e.g., Waterloo"
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
           />
@@ -136,9 +146,8 @@ export default function SmartItinerariesSearchPage() {
             min={1}
             max={30}
             inputMode="numeric"
-            className={`${styles.inputNum} ${
-              touched && errors.days ? styles.inputError : ""
-            }`}
+            className={`${styles.inputNum} ${touched && errors.days ? styles.inputError : ""
+              }`}
             value={days}
             onChange={(e) => setDays(Number(e.target.value))}
           />
@@ -157,9 +166,8 @@ export default function SmartItinerariesSearchPage() {
                 key={b}
                 type="button"
                 aria-pressed={budget === b}
-                className={`${styles.pill} ${
-                  budget === b ? styles.pillActive : ""
-                }`}
+                className={`${styles.pill} ${budget === b ? styles.pillActive : ""
+                  }`}
                 onClick={() => setBudget(b)}
               >
                 {b}
@@ -177,9 +185,8 @@ export default function SmartItinerariesSearchPage() {
                 key={v}
                 type="button"
                 aria-pressed={kidFriendly === v}
-                className={`${styles.pill} ${
-                  kidFriendly === v ? styles.pillActive : ""
-                }`}
+                className={`${styles.pill} ${kidFriendly === v ? styles.pillActive : ""
+                  }`}
                 onClick={() => setKidFriendly(v)}
               >
                 {v}
@@ -212,22 +219,22 @@ export default function SmartItinerariesSearchPage() {
         {/* Activity Themes */}
         {/* Activity Theme (single-select) */}
         <div className={styles.field}>
-        <label className={styles.label}>Activity theme</label>
-        <div className={styles.segment}>
+          <label className={styles.label}>Activity theme</label>
+          <div className={styles.segment}>
             {ALL_THEMES.map((t) => (
-            <label key={t} className={styles.segmentItem}>
+              <label key={t} className={styles.segmentItem}>
                 <input
-                type="radio"
-                name="activityTheme"
-                value={t}
-                checked={activityTheme === t}
-                onChange={() => setActivityTheme(t)}
+                  type="radio"
+                  name="activityTheme"
+                  value={t}
+                  checked={activityTheme === t}
+                  onChange={() => setActivityTheme(t)}
                 />
                 <span>{t}</span>
-            </label>
+              </label>
             ))}
-        </div>
-        <div className={styles.hint}>Pick one focus for this trip.</div>
+          </div>
+          <div className={styles.hint}>Pick one focus for this trip.</div>
         </div>
 
         {/* <div className={styles.field}>
