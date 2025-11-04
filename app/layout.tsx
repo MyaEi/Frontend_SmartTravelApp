@@ -2,6 +2,8 @@ import './capstone/capstone.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BootstrapClient from './BootstrapClient';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export const metadata = {
   title: 'Capstone Project',
