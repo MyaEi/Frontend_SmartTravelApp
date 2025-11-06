@@ -1,0 +1,210 @@
+.page {
+  padding: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  font-family: system-ui, sans-serif;
+}
+
+.header {
+  margin-bottom: 1.75rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.backBtn:hover {
+  color: #1d4ed8;
+  transform: translateX(-2px);
+}
+
+.summaryRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.summaryItem {
+  background: #f9fafb;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  min-width: 160px;
+}
+
+.summaryLabel {
+  display: block;
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.summaryValue {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Sections */
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+/* Progress list */
+
+.progressList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 0.75rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.progressItem {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.progressItem:last-child {
+  border-bottom: none;
+}
+
+/* Cards */
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.badgeWithin,
+.badgeOver {
+  font-size: 0.75rem;
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+}
+
+.badgeWithin {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badgeOver {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.cardBody {
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.costRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 0.6rem 0;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
+.remainingRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #16a34a;
+}
+
+.cardFooter {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.fxLabel {
+  display: inline-block;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+
+@media (max-width: 640px) {
+  .page {
+    padding: 1.25rem;
+  }
+
+  .summaryRow {
+    flex-direction: column;
+  }
+}

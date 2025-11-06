@@ -92,13 +92,6 @@ export default function SmartItinerariesSearchPage() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>Plan your trip</h1>
-        <p className={styles.subtitle}>
-          Tell us where and how you want to travel—then we’ll build your smart itinerary.
-        </p>
-      </header>
-
       {/* Back Button */}
       <div className={styles.backWrap}>
         <button
@@ -109,6 +102,13 @@ export default function SmartItinerariesSearchPage() {
           ← Back to Home
         </button>
       </div>
+
+      <header className={styles.header}>
+        <h1 className={styles.title}>Plan your trip</h1>
+        <p className={styles.subtitle}>
+          Tell us where and how you want to travel—then we’ll build your smart itinerary.
+        </p>
+      </header>
 
       <form className={styles.form} onSubmit={onSubmit} noValidate>
         {/* Destination */}

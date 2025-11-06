@@ -52,12 +52,14 @@ export default function Hero() {
                     </Link>
                   </div>
                   <div className="col-12 col-md-3 mb-4">
-                    <div className="card clickable-card servicecard_hover">
-                      <img src="/capstone/images/budget2.jpg" className="card-img-top" alt="Budget Optimization" />
-                      <div className="card-body">
-                        <h3 className="card-title">Budget Optimization</h3>
-                      </div>
-                    </div>
+                    {/* <div className="card clickable-card servicecard_hover"> */}
+                      <Link href="/budget-optimization/search" className="card clickable-card servicecard_hover text-decoration-none">
+                        <img src="/capstone/images/budget2.jpg" className="card-img-top" alt="Budget Optimization" />
+                        <div className="card-body">
+                          <h3 className="card-title">Budget Optimization</h3>
+                        </div>
+                      </Link>
+                    {/* </div> */}
                   </div>
                   <div className="col-12 col-md-3 mb-4">
                     <div className="card clickable-card servicecard_hover">
