@@ -53,11 +53,14 @@ export async function GET(req: NextRequest) {
     }
   }
  
-  if(!photoUrl){
-    return new NextResponse("Missing URL", { status: 400 });
-  }
-  if(!placeId){
-    return new NextResponse("Missing Place Id", { status: 400 });
-  }
+  if(!photoUrl && !placeId) {
+    if(!photoUrl){
+      return new NextResponse("Missing URL", { status: 400 });
+    }
+    if(!placeId){
+      return new NextResponse("Missing Place Id", { status: 400 });
+    }
+  } 
+  
   
 }
