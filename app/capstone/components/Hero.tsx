@@ -68,12 +68,12 @@ export default function Hero() {
                     </Link>
                   </div>
                   <div className="col-12 col-md-3 mb-4">
-                    <div className="card clickable-card servicecard_hover">
+                    <Link href="/language-buddy" className="card clickable-card servicecard_hover text-decoration-none">
                       <img src="/capstone/images/language.jpeg" className="card-img-top" alt="Language Buddy" />
                       <div className="card-body">
                         <h3 className="card-title">Language Buddy</h3>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                   {/* <div className="col-md-4">
                     <div className="card border border-0">
