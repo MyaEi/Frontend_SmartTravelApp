@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   try {
     const payload = await req.json();
 
-    const required = ["destination", "days", "budget", "kid_friendly", "travel_type", "activity_theme"] as const;
+    const required = ["destination", "days", "budget", "travel_type", "activity_theme"] as const;
       for (const k of required) {
         if (!(k in payload)) {
           return NextResponse.json(

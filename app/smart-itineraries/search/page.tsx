@@ -4,20 +4,16 @@ import React, { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./search.module.css";
 
-type Budget = "Backpacker" | "Mid-range" | "Luxury";
-type TravelType = "Solo" | "Couple" | "Family" | "Friends" | "Business";
+const budgets = ["Free", "Inexpensive", "Moderate", "Expensive", "Luxury"] as const;
+type Budget = typeof budgets[number];
+const travelTypes = ["Solo", "Couple", "Family", "Friends"] as const;
+type TravelType = typeof travelTypes[number];
 
 const ALL_THEMES = [
-  "Culture",
-  "Nature",
-  "Food",
-  "Nightlife",
   "Adventure",
-  "Shopping",
-  "Relaxation",
-  "History",
-  "Art",
-  "Kid Activities",
+  "Relaxing",
+  "Culture",
+  "Shopping"
 ] as const;
 
 export default function SmartItinerariesSearchPage() {
@@ -26,31 +22,29 @@ export default function SmartItinerariesSearchPage() {
   // ---- Form state ----
   const [destination, setDestination] = useState("");
   const [days, setDays] = useState<number>(5);
-  const [budget, setBudget] = useState<Budget>("Mid-range");
-  const [kidFriendly, setKidFriendly] = useState<"Yes" | "No">("No");
-  const [travelType, setTravelType] = useState<TravelType>("Solo");
-  const [themes, setThemes] = useState<string[]>(["Culture", "Food"]);
+  const [budget, setBudget] = useState<Budget>(budgets[0]);
+  const [travelType, setTravelType] = useState<TravelType>(travelTypes[0]);
+  //const [themes, setThemes] = useState<string[]>(["Culture", "Food"]);
   const [touched, setTouched] = useState(false);
   const [busy, setBusy] = useState(false);
-  const [activityTheme, setActivityTheme] = useState<string>("Adventure");
-  const budgetToNum: Record<Budget, 1 | 2 | 3> = {
-    "Backpacker": 1,
-    "Mid-range": 2,
-    "Luxury": 3,
+  const [activityTheme, setActivityTheme] = useState<string>(ALL_THEMES[0]);
+  const budgetToNum: Record<Budget, 0 | 1 | 2 | 3 | 4> = {
+    "Free": 0,
+    "Inexpensive": 1,
+    "Moderate": 2,
+    "Expensive": 3,
+    "Luxury": 4
   };
 
   // Example suggestions (swap with Places API later if you like)
   const suggestions = useMemo(
     () => [
-      "Toronto, ON, Canada",
-      "Waterloo, ON, Canada",
-      "Ottawa, ON, Canada",
-      "Montreal, QC, Canada",
-      "Vancouver, BC, Canada",
-      "New York, NY, USA",
-      "Tokyo, Japan",
-      "Paris, France",
-      "Bangkok, Thailand",
+      "Toronto",
+      "Vancouver",
+      "New York",
+      "Tokyo",
+      "Paris",
+      "Bangkok",
     ],
     []
   );
@@ -63,11 +57,11 @@ export default function SmartItinerariesSearchPage() {
     return e;
   }, [destination, days]);
 
-  const toggleTheme = (label: string) => {
-    setThemes((prev) =>
-      prev.includes(label) ? prev.filter((t) => t !== label) : [...prev, label]
-    );
-  };
+  // const toggleTheme = (label: string) => {
+  //   setThemes((prev) =>
+  //     prev.includes(label) ? prev.filter((t) => t !== label) : [...prev, label]
+  //   );
+  // };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,7 +74,6 @@ export default function SmartItinerariesSearchPage() {
         destination: destination.trim(),
         days: String(days),
         budget: String(budgetToNum[budget]),
-        kid_friendly: kidFriendly === "Yes" ? "true" : "false",
         travel_type: travelType.toLowerCase(),
         activity_theme: activityTheme.toLowerCase(), // single value
       });
@@ -159,15 +152,14 @@ export default function SmartItinerariesSearchPage() {
 
         {/* Budget */}
         <fieldset className={styles.fieldset}>
-          <legend className={styles.label}>Budget type</legend>
+          <label className={styles.label}>Budget Type</label>
           <div className={styles.pillsRow}>
-            {(["Backpacker", "Mid-range", "Luxury"] as Budget[]).map((b) => (
+            {budgets.map((b) => (
               <button
                 key={b}
                 type="button"
                 aria-pressed={budget === b}
-                className={`${styles.pill} ${budget === b ? styles.pillActive : ""
-                  }`}
+                className={`${styles.pill} ${budget === b ? styles.pillActive : ""}`}
                 onClick={() => setBudget(b)}
               >
                 {b}
@@ -176,66 +168,63 @@ export default function SmartItinerariesSearchPage() {
           </div>
         </fieldset>
 
-        {/* Kid Friendly */}
+        {/* Travel Type */}
         <fieldset className={styles.fieldset}>
-          <legend className={styles.label}>Kid friendly</legend>
+          <label className={styles.label}>Travel Type</label>
           <div className={styles.pillsRow}>
-            {(["No", "Yes"] as const).map((v) => (
+            {travelTypes.map((t) => (
+              // <label key={t} className={styles.segmentItem}>
+              //   <input
+              //     type="radio"
+              //     name="travelType"
+              //     value={t}
+              //     checked={travelType === t}
+              //     onChange={() => setTravelType(t)}
+              //   />
+              //   <span>{t}</span>
+              // </label>
               <button
-                key={v}
+                key={t}
                 type="button"
-                aria-pressed={kidFriendly === v}
-                className={`${styles.pill} ${kidFriendly === v ? styles.pillActive : ""
-                  }`}
-                onClick={() => setKidFriendly(v)}
+                aria-pressed={travelType === t}
+                className={`${styles.pill} ${travelType === t ? styles.pillActive : ""}`}
+                onClick={() => setTravelType(t)}
               >
-                {v}
+                {t}
               </button>
             ))}
           </div>
         </fieldset>
 
-        {/* Travel Type */}
-        <div className={styles.field}>
-          <label className={styles.label}>Travel type</label>
-          <div className={styles.segment}>
-            {(
-              ["Solo", "Couple", "Family", "Friends", "Business"] as TravelType[]
-            ).map((t) => (
-              <label key={t} className={styles.segmentItem}>
-                <input
-                  type="radio"
-                  name="travelType"
-                  value={t}
-                  checked={travelType === t}
-                  onChange={() => setTravelType(t)}
-                />
-                <span>{t}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
         {/* Activity Themes */}
         {/* Activity Theme (single-select) */}
-        <div className={styles.field}>
-          <label className={styles.label}>Activity theme</label>
-          <div className={styles.segment}>
+        <fieldset className={styles.fieldset}>
+          <label className={styles.label}>Activity Theme</label>
+          <div className={styles.pillsRow}>
             {ALL_THEMES.map((t) => (
-              <label key={t} className={styles.segmentItem}>
-                <input
-                  type="radio"
-                  name="activityTheme"
-                  value={t}
-                  checked={activityTheme === t}
-                  onChange={() => setActivityTheme(t)}
-                />
-                <span>{t}</span>
-              </label>
+              // <label key={t} className={styles.segmentItem}>
+              //   <input
+              //     type="radio"
+              //     name="activityTheme"
+              //     value={t}
+              //     checked={activityTheme === t}
+              //     onChange={() => setActivityTheme(t)}
+              //   />
+              //   <span>{t}</span>
+              // </label>
+              <button
+                key={t}
+                type="button"
+                aria-pressed={activityTheme === t}
+                className={`${styles.pill} ${activityTheme === t ? styles.pillActive : ""}`}
+                onClick={() => setActivityTheme(t)}
+              >
+                {t}
+              </button>
             ))}
           </div>
           <div className={styles.hint}>Pick one focus for this trip.</div>
-        </div>
+        </fieldset>
 
         {/* <div className={styles.field}>
           <label className={styles.label}>Activity theme</label>
@@ -272,12 +261,10 @@ export default function SmartItinerariesSearchPage() {
             onClick={() => {
               setDestination("");
               setDays(5);
-              setBudget("Mid-range");
-              setKidFriendly("No");
-              setTravelType("Solo");
-              setThemes(["Culture", "Food"]);
+              setBudget(budgets[0]);
+              setTravelType(travelTypes[0]);
               setTouched(false);
-              setActivityTheme("Adventure");
+              setActivityTheme(ALL_THEMES[0]);
             }}
           >
             Reset

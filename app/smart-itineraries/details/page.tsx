@@ -19,6 +19,8 @@ type Place = {
   price_level: number | null; // 0..4 (or null)
   types: string[];
   photo_urls: any[];
+  photo_url: string;
+  website: string | null;
 };
 
 type PlanDay = {
@@ -30,12 +32,15 @@ type PlanDay = {
 type ApiResponse = {
   destination: string;
   days: number;
-  budget: number;
   budget_label: string;
   budget_description: string;
-  kid_friendly: boolean;
   itinerary_text: string;
   plan_struct: PlanDay[];
+};
+
+type PhotosApiResponse = {
+  place_id: string;
+  photo_urls: string[];
 };
 
 type SentimentResponse = {
@@ -113,7 +118,8 @@ function Pill({
 
 function PlaceCard({ p }: { p: Place }) {
   const tags = prettyTypes(p.types);
-  const photos = p?.photo_urls || [];
+  //const photos = p?.photo_urls || [];
+  const photo = p?.photo_url || "";
 
   // Slider settings
   const settings = {
@@ -125,6 +131,12 @@ function PlaceCard({ p }: { p: Place }) {
     arrows: true,
     adaptiveHeight: true,
   };
+
+  // --- Photos UI state ---
+  const [photos, setPhotos] = useState<string[] | null>(null);
+  const [photosLoading, setPhotosLoading] = useState(false);
+  const [photosErr, setPhotosErr] = useState<string | null>(null);
+  const [showPhotosModal, setShowPhotosModal] = useState(false);
 
   // --- Sentiment UI state ---
   const [sentiment, setSentiment] = useState<SentimentResponse | null>(null);
@@ -158,11 +170,35 @@ function PlaceCard({ p }: { p: Place }) {
     }
   };
 
+  const handleOpenPhotos = async () => {
+    setShowPhotosModal(true);
+
+    // already loaded or loading → don’t refetch
+    if (photos || photosLoading) return;
+
+    setPhotosLoading(true);
+    setPhotosErr(null);
+
+    try {
+      const res = await fetch(`/api/photo-proxy?place_id=${p.place_id}`);
+      if (!res.ok) {
+        const msg = await res.text();
+        throw new Error(msg || `HTTP ${res.status}`);
+      }
+      const json: PhotosApiResponse = await res.json();
+      setPhotos(json.photo_urls || []);
+    } catch (e: any) {
+      setPhotosErr(e.message || "Failed to load photos");
+    } finally {
+      setPhotosLoading(false);
+    }
+  };
+
   return (
     <>
       <div className={styles.card}>
         {/* --- Carousel Photo Section --- */}
-        {photos.length > 0 && (
+        {/* {photos.length > 0 && (
           <div className={styles.carouselWrap}>
             <Slider {...settings}>
               {photos.map((url, idx) => (
@@ -176,6 +212,27 @@ function PlaceCard({ p }: { p: Place }) {
                 </div>
               ))}
             </Slider>
+          </div>
+        )} */}
+
+        {/* Main cover photo */}
+        {photo && (
+          <div className={styles.slide}>
+            <img
+              src={`/api/photo-proxy?url=${encodeURIComponent(photo)}`}
+              alt={`${p.name} photo`}
+              className={styles.slideImg}
+              loading="lazy"
+            />
+
+            {/* "See more photos" button over the image */}
+            <button
+              type="button"
+              className={styles.photoMoreBtn}
+              onClick={handleOpenPhotos}
+            >
+              See more photos
+            </button>
           </div>
         )}
 
@@ -230,6 +287,18 @@ function PlaceCard({ p }: { p: Place }) {
         </div>
 
         <div className={styles.actionsRow}>
+           {/* Show only if website exists */}
+  {p.website && (
+    <a
+      className={styles.btnPrimary}
+      href={p.website}
+      target="_blank"
+      rel="noreferrer"
+    >
+      Book Now
+    </a>
+  )}
+  
           <a
             className={styles.btnOutline}
             href={mapsSearch(p)}
@@ -365,6 +434,59 @@ function PlaceCard({ p }: { p: Place }) {
           </div>
         </div>
       )}
+
+      {/* -------- Photos modal -------- */}
+      {showPhotosModal && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setShowPhotosModal(false)}
+        >
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <header className={styles.modalHeader}>
+              <div>
+                <p className={styles.modalEyebrow}>Photos</p>
+                <h3 className={styles.modalTitle}>{p.name}</h3>
+              </div>
+              <button
+                type="button"
+                className={styles.modalClose}
+                onClick={() => setShowPhotosModal(false)}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </header>
+
+            {photosLoading && (
+              <p className={styles.modalMuted}>Loading photos…</p>
+            )}
+            {photosErr && !photosLoading && (
+              <p className={styles.modalError}>{photosErr}</p>
+            )}
+
+            {photos && photos.length > 0 && !photosLoading && !photosErr && (
+              <div className={styles.photosSliderWrap}>
+                <Slider {...settings}>
+                  {photos.map((url, idx) => (
+                    <div key={idx} className={styles.photoModalSlide}>
+                      <img
+                        src={`/api/photo-proxy?url=${encodeURIComponent(url)}`}
+                        alt={`${p.name} photo ${idx + 1}`}
+                        className={styles.photoModalImg}
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            )}
+
+            {photos && photos.length === 0 && !photosLoading && !photosErr && (
+              <p className={styles.modalMuted}>No extra photos found.</p>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 }
@@ -384,15 +506,14 @@ export default function SmartItinerariesPage() {
   const [showFood, setShowFood] = useState(true);
   const [day, setDay] = useState<number | "all">(1);
 
+  const destination = params.get("destination") ?? "";
+  const days = Number(params.get("days") ?? "0");
+  const budget = Number(params.get("budget") ?? "0");
+  const travel_type = (params.get("travel_type") ?? "").toLowerCase();
+  const activity_theme = (params.get("activity_theme") ?? "").toLowerCase();
+
   // Build the query string for the API from the URL params
   useEffect(() => {
-    const destination = params.get("destination") ?? "";
-    const days = Number(params.get("days") ?? "0");
-    const budget = Number(params.get("budget") ?? "0");
-    const kid_friendly = (params.get("kid_friendly") ?? "false") === "true";
-    const travel_type = (params.get("travel_type") ?? "").toLowerCase();
-    const activity_theme = (params.get("activity_theme") ?? "").toLowerCase();
-
     // Minimal guard: require destination & days
     if (!destination || !days) {
       setErr("Missing required search parameters.");
@@ -411,7 +532,6 @@ export default function SmartItinerariesPage() {
         destination,
         days,
         budget,
-        kid_friendly,
         travel_type,
         activity_theme,
       }),
@@ -502,7 +622,8 @@ export default function SmartItinerariesPage() {
         <div className={styles.statsRow}>
           <Stat label="Days" value={String(data.days)} />
           <Stat label="Budget" value={data.budget_label} />
-          <Stat label="Kid Friendly" value={data.kid_friendly ? "Yes" : "No"} />
+          <Stat label="Travel Type" value={travel_type} />
+          <Stat label="Activity Theme" value={activity_theme} />
         </div>
       </header>
 
