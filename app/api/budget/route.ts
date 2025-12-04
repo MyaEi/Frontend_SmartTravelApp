@@ -1,32 +1,52 @@
-// app/api/budget/optimize-trip/route.ts
+// app/api/budget/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
+const BACKEND_URL = process.env.BACKEND_URL || "http://127.0.0.1:8000";
 
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
-    const body = await req.json();
+    const body = await request.json();
 
-    const res = await fetch(`${API_BASE}/budget/optimize-trip`, {
+    // Correct endpoint with hyphen
+    const backendEndpoint = `${BACKEND_URL}/budget/optimize-trip`;
+    
+    console.log("Proxying budget request to backend:", {
+      url: backendEndpoint,
+      payload: body,
+    });
+
+    const response = await fetch(backendEndpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(body),
     });
 
-    if (!res.ok) {
-      const msg = await res.text();
+    const responseText = await response.text();
+    console.log("Backend response status:", response.status);
+    console.log("Backend response body:", responseText);
+
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      data = { error: responseText };
+    }
+
+    if (!response.ok) {
+      console.error("Backend error:", data);
       return NextResponse.json(
-        { error: msg || "Failed to optimize trip" },
-        { status: res.status }
+        { error: data.detail || data.error || "Failed to optimize trip" },
+        { status: response.status }
       );
     }
 
-    const json = await res.json();
-    return NextResponse.json(json);
-  } catch (err: any) {
-    console.error("budget optimize route error:", err);
+    return NextResponse.json(data);
+  } catch (error: any) {
+    console.error("API route error:", error);
     return NextResponse.json(
-      { error: err?.message || "Internal server error" },
+      { error: error.message || "Internal server error" },
       { status: 500 }
     );
   }

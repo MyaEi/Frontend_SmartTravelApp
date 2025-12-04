@@ -5,17 +5,19 @@ import { useRouter } from "next/navigation";
 import styles from "../../smart-itineraries/search/search.module.css";
 
 type Currency = "CAD" | "USD" | "EUR" | "THB";
+type TravelStyle = "moderate" | "budget" | "luxury";
 
 export default function BudgetOptimizerSearchPage() {
   const router = useRouter();
 
   // ---- Form state ----
-  const [origin, setOrigin] = useState("YYZ");
-  const [destination, setDestination] = useState("BKK");
-  const [departDate, setDepartDate] = useState("2025-12-01");
-  const [returnDate, setReturnDate] = useState("2025-12-05");
-  const [budget, setBudget] = useState<number>(3000);
+  const [origin, setOrigin] = useState("Toronto");
+  const [destination, setDestination] = useState("Bangkok");
+  const [departDate, setDepartDate] = useState("2026-03-25");
+  const [returnDate, setReturnDate] = useState("2026-03-30");
+  const [budget, setBudget] = useState<number>(6000);
   const [currency, setCurrency] = useState<Currency>("CAD");
+  const [travelStyle, setTravelStyle] = useState<TravelStyle>("moderate");
 
   const [touched, setTouched] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -69,6 +71,7 @@ export default function BudgetOptimizerSearchPage() {
         return_date: returnDate,
         budget: String(budget),
         currency,
+        travel_style: travelStyle,
       });
 
       router.push(`/budget-optimization/details?${params.toString()}`);
@@ -78,12 +81,13 @@ export default function BudgetOptimizerSearchPage() {
   };
 
   const onReset = () => {
-    setOrigin("YYZ");
-    setDestination("BKK");
-    setDepartDate("2025-12-01");
-    setReturnDate("2025-12-05");
-    setBudget(3000);
+    setOrigin("Toronto");
+    setDestination("Bangkok");
+    setDepartDate("2026-03-25");
+    setReturnDate("2026-03-30");
+    setBudget(6000);
     setCurrency("CAD");
+    setTravelStyle("moderate");
     setTouched(false);
   };
 
@@ -239,6 +243,25 @@ export default function BudgetOptimizerSearchPage() {
           <div className={styles.hint}>
             All package totals and remaining budget will be shown in this
             currency.
+          </div>
+        </div>
+
+        <div className={styles.field}>
+          <label htmlFor="travelStyle" className={styles.label}>
+            Travel style
+          </label>
+          <select
+            id="travelStyle"
+            className={styles.input}
+            value={travelStyle}
+            onChange={(e) => setTravelStyle(e.target.value as TravelStyle)}
+          >
+            <option value="budget">Budget</option>
+            <option value="moderate">Moderate</option>
+            <option value="luxury">Luxury</option>
+          </select>
+          <div className={styles.hint}>
+            Choose your preferred travel style for activities, meals, and accommodations.
           </div>
         </div>
 
