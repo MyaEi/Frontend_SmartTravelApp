@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BootstrapClient from './BootstrapClient';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import ChatbotWidget from './components/ChatbotWidget'; 
 
 export const metadata = {
   title: 'Capstone Project',
@@ -17,8 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>      <BootstrapClient />
-      {children}</body>
+      <body>      
+        <BootstrapClient />
+        {children}
+        <ChatbotWidget />
+      </body>
     </html>
   )
 }
