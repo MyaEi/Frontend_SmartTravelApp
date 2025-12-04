@@ -10,6 +10,7 @@ type PlaceSummary = {
     rating: number;
     user_ratings_total: number;
     place_id: string;
+    photo_url?: string;  //EK
 };
 
 type SentimentSample = {
@@ -40,6 +41,7 @@ export default function AttractionSentimentPage() {
     const [data, setData] = useState<SentimentApiResponse | null>(null);
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState<string | null>(null);
+    const [showSamples, setShowSamples] = useState(false); //EK
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -66,12 +68,29 @@ export default function AttractionSentimentPage() {
 
             const json: SentimentApiResponse = await res.json();
             setData(json);
+            setShowSamples(false);  // collapse review highlights on every new search - EK
         } catch (e: any) {
             setErr(e.message || "Failed to analyze this place.");
         } finally {
             setLoading(false);
         }
     };
+
+    /* EK */
+    const StarRating = ({ rating }: { rating: number }) => {
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+        return (
+            <div className={styles.starRow}>
+                {"★".repeat(fullStars)}
+                {halfStar && "☆"}
+                {"☆".repeat(emptyStars)}
+            </div>
+        );
+    };
+    /* EK */
 
     const sentiment = data?.sentiment;
     const place = data?.place;
@@ -145,7 +164,49 @@ export default function AttractionSentimentPage() {
                             <h2 className={styles.placeName}>{place?.name}</h2>
                             <span className={styles.placeBadge}>Traveler Sentiment</span>
                         </div>
+
+                        {/* STAR RATING */}
+                        {place?.rating && (
+                            <StarRating rating={place.rating} />
+                        )}
+
                         <p className={styles.placeAddress}>{place?.address}</p>
+
+                        {/* PLACE PHOTO - EK */}
+                        {place?.photo_url && (
+                            <>
+                                <div className={styles.placePhotoWrap}>
+                                    <img
+                                        src={place.photo_url}
+                                        alt={place.name}
+                                        className={styles.placePhoto}
+                                    />
+                                </div>
+
+                                {/* View on Google Maps Button */}
+                                <a
+                                    href={`https://www.google.com/maps/place/?q=place_id:${place.place_id}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.mapButton}
+                                >
+                                    {/* Google-style Pin Icon */}
+                                    <svg
+                                        className={styles.mapIcon}
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5c-1.38 
+                                                0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+
+                                    View on Google Maps
+                                </a>
+                            </>
+                        )}
+                        {/* PLACE PHOTO - EK */}
 
                         <div className={styles.placeStatsRow}>
                             <div className={styles.placeStat}>
@@ -207,7 +268,7 @@ export default function AttractionSentimentPage() {
                     ) : null}
 
                     {/* Sample Reviews */}
-                    {sentiment?.samples?.length ? (
+                    {/* {sentiment?.samples?.length ? (
                         <section className={styles.sectionBlock}>
                             <h3 className={styles.sectionTitle}>Sample reviews</h3>
                             <div className={styles.samplesGrid}>
@@ -226,7 +287,43 @@ export default function AttractionSentimentPage() {
                                 ))}
                             </div>
                         </section>
+                    ) : null} */}
+                    {/* Sample Reviews Collapsible - EK */}
+                    {sentiment?.samples?.length ? (
+                        <section className={styles.sectionBlock}>
+                            <div
+                                className={styles.sampleToggle}
+                                onClick={() => setShowSamples(!showSamples)}
+                            >
+                                <h3 className={styles.sectionTitle}>
+                                    Review Highlights ({sentiment?.samples?.length || 0})
+                                </h3>
+
+                                <span className={styles.toggleIcon}>
+                                    {showSamples ? "▲ Hide" : "▼ Show"}
+                                </span>
+                            </div>
+
+                            {showSamples && (
+                                <div className={styles.samplesGrid}>
+                                    {sentiment.samples.map((s, idx) => (
+                                        <article key={idx} className={styles.sampleCard}>
+                                            <div className={styles.sampleMeta}>
+                                                <span className={styles.sampleLabel}>
+                                                    {s.label === "POSITIVE" ? "Positive" : s.label}
+                                                </span>
+                                                <span className={styles.sampleScore}>
+                                                    Score {s.score.toFixed(2)}
+                                                </span>
+                                            </div>
+                                            <p className={styles.sampleText}>{s.text}</p>
+                                        </article>
+                                    ))}
+                                </div>
+                            )}
+                        </section>
                     ) : null}
+                    {/* Sample Reviews Collapsible - EK */}
                 </main>
             )}
         </div>

@@ -29,7 +29,8 @@
 .subtitle {
   margin: 0;
   color: var(--muted);
-  max-width: 640px;
+  max-width: 680px;
+  /* EK */
 }
 
 /* Search section */
@@ -141,12 +142,21 @@
   margin-bottom: 4px;
 }
 
-.placeName {
+/* .placeName {
   margin: 0;
   font-size: 20px;
   font-weight: 700;
   color: var(--text);
+} */
+
+.placeName {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: #1a1a1a;
+  letter-spacing: -0.3px;
 }
+
 
 .placeBadge {
   font-size: 11px;
@@ -158,11 +168,17 @@
   color: #1d4ed8;
 }
 
-.placeAddress {
+/* .placeAddress {
   margin: 0 0 10px;
   font-size: 13px;
   color: var(--muted);
+} */
+.placeAddress {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 12px;
 }
+
 
 .placeStatsRow {
   display: grid;
@@ -313,3 +329,101 @@
   color: #1d4ed8;
   transform: translateX(-2px);
 }
+
+/* EK - BEGIN */
+/* PLACE PHOTO */
+.placePhotoWrap {
+  width: 100%;
+  height: 260px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 12px 0 20px;
+  background: #f6f6f6;
+  border: 1px solid #e8e8e8;
+
+  /* Soft, modern shadow */
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.10);
+  position: relative;
+}
+
+
+.placePhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+
+.placePhoto:hover {
+  transform: scale(1.03);
+  /* slight zoom hover */
+}
+
+.placePhotoWrap::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.35), transparent);
+  pointer-events: none;
+}
+
+
+/* Reviews Toogle*/
+.sampleToggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px 2px;
+}
+
+.toggleIcon {
+  font-size: 13px;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+/* Rating Stars*/
+.starRow {
+  color: #f5b301;
+  /* Google star yellow */
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 2px;
+}
+
+
+/* Map Button */
+.mapButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  /* space between icon & text */
+  margin-top: 10px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: #1a73e8;
+  /* Google Blue */
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mapButton:hover {
+  background: #1765c0;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mapIcon {
+  width: 18px;
+  height: 18px;
+  color: white;
+  /* matches text color */
+}
+
+/* EK - END */
