@@ -129,7 +129,7 @@ const ChatbotWidget: React.FC = () => {
       {isOpen && (
         <div className="chatbot-container">
           <div className="chatbot-header">
-            <span>Trip Chatbot</span>
+            <span>Smart Travel Assistant</span>
             <button
               type="button"
               className="chatbot-close-btn"
@@ -150,17 +150,16 @@ const ChatbotWidget: React.FC = () => {
             {messages.map((msg, idx) => (
               <div
                 key={idx}
-                className={`chat-message ${
-                  msg.role === "user"
-                    ? "chat-message-user"
-                    : "chat-message-assistant"
-                }`}
+                className={`chat-message ${msg.role === "user"
+                  ? "chat-message-user"
+                  : "chat-message-assistant"
+                  }`}
               >
                 <div className="chat-message-role">
                   {msg.role === "user" ? "You" : "Bot"}
                 </div>
                 <div className="chat-message-text">
-                    <ReactMarkdown>{msg.text}</ReactMarkdown>
+                  <ReactMarkdown>{msg.text}</ReactMarkdown>
                 </div>
               </div>
             ))}
@@ -169,7 +168,7 @@ const ChatbotWidget: React.FC = () => {
               <div className="chat-message chat-message-assistant">
                 <div className="chat-message-role">Bot</div>
                 <div className="chat-message-text">
-                    <ReactMarkdown>Thinking...</ReactMarkdown>
+                  <ReactMarkdown>Thinking...</ReactMarkdown>
                 </div>
               </div>
             )}

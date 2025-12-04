@@ -1,3 +1,6 @@
+/* ================================
+   Chatbot Toggle Button
+===================================*/
 .chatbot-toggle-btn {
   position: fixed;
   bottom: 1.5rem;
@@ -15,8 +18,16 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   background: #2563eb;
   color: white;
+  transition: transform 0.2s ease;
 }
 
+.chatbot-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ================================
+   Chatbot Container (OCEAN BLUE THEME)
+===================================*/
 .chatbot-container {
   position: fixed;
   bottom: 5.5rem;
@@ -24,22 +35,32 @@
   z-index: 9999;
   width: 360px;
   max-height: 480px;
-  background: #ffffff;
+
+  /* 🌊 NEW Ocean Blue background */
+  background: linear-gradient(180deg, #dff3ff 0%, #ffffff 70%);
+
   border-radius: 0.75rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 20px 40px rgba(0, 80, 150, 0.25);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+/* ================================
+   Header (Ocean Blue gradient)
+===================================*/
 .chatbot-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  background: #f9fafb;
+
+  /* 🌊 NEW ocean blue header */
+  background: linear-gradient(90deg, #1e88e5, #42a5f5);
+
+  border-bottom: none;
+  color: white;
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -49,13 +70,19 @@
   background: transparent;
   cursor: pointer;
   font-size: 1rem;
+  color: white;
 }
 
+/* ================================
+   Messages Container
+===================================*/
 .chatbot-messages {
   flex: 1;
   padding: 0.75rem;
   overflow-y: auto;
-  background: #f3f4f6;
+
+  /* 🌤 Soft light blue */
+  background: #f0f7ff;
 }
 
 .chatbot-empty {
@@ -65,6 +92,9 @@
   margin-top: 1rem;
 }
 
+/* ================================
+   Message Bubbles
+===================================*/
 .chat-message {
   margin-bottom: 0.75rem;
   max-width: 90%;
@@ -73,18 +103,25 @@
   font-size: 0.85rem;
 }
 
+/* USER MESSAGE */
 .chat-message-user {
   margin-left: auto;
   background: #2563eb;
   color: #ffffff;
 }
 
+/* ASSISTANT MESSAGE */
 .chat-message-assistant {
   margin-right: auto;
-  background: #ffffff;
-  color: #111827;
+
+  /* 🌊 New soft ocean bubble */
+  background: #e7f3ff;
+  border: 1px solid #c7e2ff;
+
+  color: #0f2645;
 }
 
+/* ROLES */
 .chat-message-role {
   font-size: 0.65rem;
   opacity: 0.8;
@@ -96,9 +133,12 @@
 }
 
 .chat-message-assistant .chat-message-role {
-  color: #6b7280;
+  color: #3b4a60;
 }
 
+/* ================================
+   Input Section
+===================================*/
 .chatbot-input-wrapper {
   border-top: 1px solid #e5e7eb;
   padding: 0.5rem;
@@ -116,6 +156,7 @@
   border: 1px solid #d1d5db;
   padding: 0.4rem 0.5rem;
   outline: none;
+  background: #ffffff;
 }
 
 .chatbot-input:focus {
@@ -123,6 +164,7 @@
   box-shadow: 0 0 0 1px #2563eb20;
 }
 
+/* SEND BUTTON */
 .chatbot-send-btn {
   border: none;
   border-radius: 9999px;
@@ -134,11 +176,18 @@
   color: white;
 }
 
+.chatbot-send-btn:hover {
+  opacity: 0.85;
+}
+
 .chatbot-send-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
+/* ================================
+   Mobile Responsive
+===================================*/
 @media (max-width: 640px) {
   .chatbot-container {
     width: 90vw;
