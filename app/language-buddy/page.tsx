@@ -73,6 +73,21 @@ export default function LanguageBuddyPage() {
         };
     }, []);
 
+    // Extract translation + pronunciation (if exists) //EK
+    const extractPronunciation = (text: string) => {
+        const match = text.match(/^(.*)\((.*)\)$/);
+        if (!match) {
+            return {
+                translated: text.trim(),
+                pronunciation: null
+            };
+        }
+        return {
+            translated: match[1].trim(),
+            pronunciation: match[2].trim()
+        };
+    };
+
     const handleTranslate = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -99,8 +114,8 @@ export default function LanguageBuddyPage() {
                 body: JSON.stringify({
                     message: trimmed,
                     mode: "translate",
-                    source_lang: sourceLang,   // 👈 now dynamic
-                    target_lang: targetLang,   // 👈 now dynamic
+                    source_lang: sourceLang,
+                    target_lang: targetLang,
                     tone,
                 }),
             });
@@ -111,7 +126,8 @@ export default function LanguageBuddyPage() {
             }
 
             const json: TranslateResponse = await res.json();
-            setTranslatedText(json.reply);
+            const cleaned = json.reply.replace(/\*\*/g, ""); //// Remove ** Markdown bold markers
+            setTranslatedText(cleaned);
         } catch (e: any) {
             setTranslateError(e.message || "Translation failed.");
         } finally {
@@ -135,8 +151,32 @@ export default function LanguageBuddyPage() {
         });
     };
 
+    const cleanForTTS = (text: string) => {
+        if (!text) return "";
+
+        return text
+            .replace(/\*\*/g, "")          // remove Markdown bold
+            .replace(/\u200B/g, "")        // remove zero-width spaces
+            .replace(/[”“]/g, '"')         // replace fancy quotes
+            .replace(/[’]/g, "'")          // replace apostrophes
+            .trim();
+    };
+
+
+    const handleSpeak = (text: string) => {
+        if (!text) return;
+        const utterance = new SpeechSynthesisUtterance(text);
+        //utterance.lang = "my-MM";  // Burmese voice if available
+        utterance.rate = 0.85;     // little slowe  r for clarity
+        speechSynthesis.speak(utterance);
+    };
+
+
+    // const prettyLang = (lang: string) =>
+    //     lang ? lang.charAt(0).toUpperCase() + lang.slice(1) : lang;
     const prettyLang = (lang: string) =>
         lang ? lang.charAt(0).toUpperCase() + lang.slice(1) : lang;
+
 
     return (
         <div className={styles.pageWrap}>
@@ -150,14 +190,22 @@ export default function LanguageBuddyPage() {
                     ← Back to Home
                 </button>
             </div>
-            
+
             {/* Header */}
             <header className={styles.header}>
                 <h1 className={styles.title}>Language Buddy</h1>
                 <p className={styles.subtitle}>
-                    Translate your message between any two supported languages with the tone you choose.
+                    Your AI-powered travel translator - convert messages between languages with your preferred tone.
                 </p>
             </header>
+
+            {/* <header className={styles.header}>
+                <h1 className={styles.title}>Language Buddy</h1>
+                <p className={styles.subtitle}>
+                    Translate your message between any two supported languages with the tone you choose.
+                </p>
+            </header> */}
+
 
             {/* Input / controls */}
             <section className={styles.card}>
@@ -173,8 +221,11 @@ export default function LanguageBuddyPage() {
                                 onChange={(e) => setSourceLang(e.target.value)}
                             >
                                 {languages.map((lang) => (
+                                    // <option key={lang} value={lang}>
+                                    //     {lang}
+                                    // </option>
                                     <option key={lang} value={lang}>
-                                        {lang}
+                                        {prettyLang(lang)}
                                     </option>
                                 ))}
                             </select>
@@ -199,8 +250,11 @@ export default function LanguageBuddyPage() {
                                 onChange={(e) => setTargetLang(e.target.value)}
                             >
                                 {languages.map((lang) => (
+                                    // <option key={lang} value={lang}>
+                                    //     {lang}
+                                    // </option>
                                     <option key={lang} value={lang}>
-                                        {lang}
+                                        {prettyLang(lang)}
                                     </option>
                                 ))}
                             </select>
@@ -208,7 +262,19 @@ export default function LanguageBuddyPage() {
                     </div>
 
                     {/* === MESSAGE TEXTAREA BELOW === */}
-                    <div className={styles.formRow}>
+                    <div className={styles.messageField}>
+                        <label className={styles.label}>Your message</label>
+                        <textarea
+                            className={styles.textarea}
+                            placeholder="Type your message…"
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            rows={6}
+                        />
+                    </div>
+
+
+                    {/* <div className={styles.formRow}>
                         <label className={styles.label}>
                             Your message
                             <textarea
@@ -218,23 +284,24 @@ export default function LanguageBuddyPage() {
                                 rows={4}
                             />
                         </label>
-                    </div>
+                    </div> */}
+
 
                     {/* === TONE BELOW MESSAGE === */}
                     <div className={styles.formRow}>
-                        <label className={styles.label}>
-                            Tone
-                            <select
-                                className={styles.select}
-                                value={tone}
-                                onChange={(e) => setTone(e.target.value)}
-                            >
-                                <option value="polite">Polite</option>
-                                <option value="formal">Formal</option>
-                                <option value="casual">Casual</option>
-                            </select>
-                        </label>
+                        <label className={styles.label}>Tone</label>
+
+                        <select
+                            className={styles.select}
+                            value={tone}
+                            onChange={(e) => setTone(e.target.value)}
+                        >
+                            <option value="polite">Polite 🙂</option>
+                            <option value="formal">Formal 🧑‍💼</option>
+                            <option value="casual">Casual 😎</option>
+                        </select>
                     </div>
+
 
                     {/* Button + hint */}
                     <div className={styles.actionsRow}>
@@ -259,30 +326,56 @@ export default function LanguageBuddyPage() {
 
 
             {/* Result */}
-            {translatedText && (
-                <section className={styles.card}>
-                    <div className={styles.resultHeader}>
-                        <div>
-                            <h2 className={styles.resultTitle}>Translated message</h2>
-                            <p className={styles.resultMeta}>
-                                {prettyLang(sourceLang)} → {prettyLang(targetLang)} ·{" "}
-                                {prettyLang(tone)} tone
-                            </p>
-                        </div>
-                        <button
-                            type="button"
-                            className={styles.ghostButton}
-                            onClick={handleCopy}
-                        >
-                            Copy
-                        </button>
-                    </div>
+            {translatedText && (() => {
+                const { translated, pronunciation } = extractPronunciation(translatedText);
 
-                    <div className={styles.resultBody}>
-                        <p className={styles.resultText}>{translatedText}</p>
-                    </div>
-                </section>
-            )}
+                return (
+                    <section className={styles.card}>
+                        <h2 className={styles.resultTitle}>Translation Result</h2>
+
+                        <div className={styles.sideBySide}>
+
+                            {/* Left: Original message */}
+                            <div className={styles.column}>
+                                <h3 className={styles.colHeader}>
+                                    Your Message ({prettyLang(sourceLang)})
+                                </h3>
+                                <p className={styles.colText}>{message}</p>
+                            </div>
+
+                            {/* Right: Translated with pronunciation */}
+                            <div className={styles.column}>
+                                <h3 className={styles.colHeader}>
+                                    Translated ({prettyLang(targetLang)} • {prettyLang(tone)})
+                                </h3>
+                                <p className={styles.colText}>{translated}</p>
+
+                                <div className={styles.speakContainer}>
+                                    {pronunciation && (
+                                        <p className={styles.pronunciation}>
+                                            <strong>Pronunciation:</strong> {pronunciation}
+                                        </p>
+                                    )}
+
+                                    {/* <button
+                                        type="button"
+                                        className={styles.speakButton}
+                                        onClick={() => handleSpeak(pronunciation || translated)}
+                                    >
+                                        🔊 Speak
+                                    </button> */}
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </section>
+                );
+            })()}
+
+
+
         </div>
     );
 }

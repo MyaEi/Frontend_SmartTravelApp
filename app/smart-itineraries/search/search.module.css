@@ -3,21 +3,36 @@
   max-width: 960px;
   margin: 0 auto;
   padding: 2rem 1rem 4rem;
-  background-color: #f9fafb; /* light neutral bg */
-  color: #111827; /* dark text */
+
+  /* 🌊 Ocean Blue Travel Theme */
+  /* background: linear-gradient(180deg, #dff3ff 0%, #ffffff 70%),
+    url("/images/world-map-light.svg"); */
+
+
+  background: linear-gradient(180deg, #b5dbff 0%, #ffffff 70%),
+    url("/images/world-map-light.svg");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 92%, cover;
+  background-attachment: fixed;
+
+  color: #111827;
 }
+
 
 /* Header section */
 .header {
   text-align: left;
   margin-bottom: 1.5rem;
 }
+
 .title {
   font-size: clamp(1.8rem, 1.2rem + 1.5vw, 2.4rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #1f2937;
 }
+
 .subtitle {
   color: #6b7280;
   margin-top: 0.35rem;
@@ -36,7 +51,8 @@
 }
 
 /* Field and label */
-.field, .fieldset {
+.field,
+.fieldset {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -47,16 +63,20 @@
   padding: 0;
   margin: 0;
 }
+
 .label {
   font-weight: 600;
   color: #374151;
 }
+
 .req {
-  color: #dc2626; /* red-600 */
+  color: #dc2626;
+  /* red-600 */
 }
 
 /* Inputs */
-.input, .inputNum {
+.input,
+.inputNum {
   background: #ffffff;
   border: 1px solid #d1d5db;
   border-radius: 0.6rem;
@@ -65,18 +85,24 @@
   color: #111827;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.input:focus, .inputNum:focus {
-  border-color: #2563eb; /* blue-600 */
+
+.input:focus,
+.inputNum:focus {
+  border-color: #2563eb;
+  /* blue-600 */
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
   outline: none;
 }
+
 .inputError {
   border-color: #ef4444;
 }
+
 .hint {
   font-size: 0.85rem;
   color: #6b7280;
 }
+
 .error {
   font-size: 0.9rem;
   color: #dc2626;
@@ -88,6 +114,7 @@
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
 .pill {
   background: #f3f4f6;
   border: 1px solid #d1d5db;
@@ -98,17 +125,21 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.pill:hover:not(.pillActive){
+
+.pill:hover:not(.pillActive) {
   background: #e5e7eb;
 }
+
 .pillActive {
   background: #2563eb;
   color: #ffffff;
   border-color: #2563eb;
   box-shadow: 0 4px 8px rgba(37, 99, 235, 0.25);
 }
+
 .pillActive:hover {
-  background: #1d4ed8; /* darker blue */
+  background: #1d4ed8;
+  /* darker blue */
 }
 
 /* Segmented (Travel type radios) */
@@ -117,6 +148,7 @@
   gap: 0.5rem;
   flex-wrap: wrap;
 }
+
 .segmentItem {
   display: flex;
   align-items: center;
@@ -130,9 +162,11 @@
   color: #111827;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
+
 .segmentItem input {
   accent-color: #2563eb;
 }
+
 .segmentItem:hover {
   background: #f3f4f6;
   border-color: #9ca3af;
@@ -144,6 +178,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.5rem 0.75rem;
 }
+
 .checkItem {
   display: flex;
   align-items: center;
@@ -155,9 +190,11 @@
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
+
 .checkItem input {
   accent-color: #2563eb;
 }
+
 .checkItem:hover {
   background: #f3f4f6;
   border-color: #9ca3af;
@@ -170,6 +207,7 @@
   gap: 0.75rem;
   margin-top: 0.25rem;
 }
+
 .primary {
   background: #2563eb;
   color: white;
@@ -180,13 +218,16 @@
   cursor: pointer;
   transition: box-shadow 0.2s ease, transform 0.05s ease;
 }
+
 .primary:hover {
   box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
 }
+
 .primary:disabled {
   opacity: 0.65;
   cursor: not-allowed;
 }
+
 .ghost {
   background: white;
   border: 1px solid #d1d5db;
@@ -197,6 +238,7 @@
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }
+
 .ghost:hover {
   background: #f3f4f6;
 }
@@ -215,6 +257,7 @@
     grid-template-columns: 1fr;
     padding: 1.25rem;
   }
+
   .checkboxGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
