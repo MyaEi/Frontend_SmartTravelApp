@@ -22,7 +22,7 @@ export default function LanguageBuddyPage() {
 
     // NEW: source + target
     const [sourceLang, setSourceLang] = useState<string>("english");
-    const [targetLang, setTargetLang] = useState<string>("burmese");
+    const [targetLang, setTargetLang] = useState<string>();
 
     const [tone, setTone] = useState<string>("polite");
 
@@ -50,9 +50,8 @@ export default function LanguageBuddyPage() {
                 const langs = json.supported_languages || [];
                 setLanguages(langs);
 
-                // Try to keep english/burmese defaults if present
                 let src = "english";
-                let tgt = "burmese";
+                let tgt = "english";
 
                 if (!langs.includes(src) && langs.length) src = langs[0];
                 if (!langs.includes(tgt) && langs.length) tgt = langs[0];
