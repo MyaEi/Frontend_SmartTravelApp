@@ -43,20 +43,51 @@ type PhotosApiResponse = {
   photo_urls: string[];
 };
 
+// type SentimentResponse = {
+//   place_id: string;
+//   num_reviews: number;
+//   summary: string;
+//   avg_score: number;
+//   positive_ratio: number;
+//   keywords: string[];
+//   human_summary: string;
+//   samples: {
+//     text: string;
+//     label: string;
+//     score: number;
+//   }[];
+// };
+
+/* EK */
 type SentimentResponse = {
-  place_id: string;
-  num_reviews: number;
-  summary: string;
-  avg_score: number;
-  positive_ratio: number;
-  keywords: string[];
-  human_summary: string;
-  samples: {
-    text: string;
-    label: string;
-    score: number;
-  }[];
+  place: {
+    place_id: string;
+    name: string;
+    address: string;
+    rating: number;
+    user_ratings_total: number;
+    photo_url: string;
+  };
+
+  sentiment: {
+    place_id: string;
+    place_name: string;
+    num_reviews: number;
+    summary: string;
+    avg_score: number;
+    positive_ratio: number;
+    keywords: string[];
+    human_summary: string;
+
+    samples: {
+      text: string;
+      label: string;
+      score: number;
+    }[];
+  };
 };
+/* EK */
+
 
 // ---------- Helpers ----------
 const priceTo$ = (lvl?: number | null) => {
@@ -118,7 +149,6 @@ function Pill({
 
 function PlaceCard({ p }: { p: Place }) {
   const tags = prettyTypes(p.types);
-  //const photos = p?.photo_urls || [];
   const photo = p?.photo_url || "";
 
   // Slider settings
@@ -139,30 +169,28 @@ function PlaceCard({ p }: { p: Place }) {
   const [showPhotosModal, setShowPhotosModal] = useState(false);
 
   // --- Sentiment UI state ---
-  const [sentiment, setSentiment] = useState<SentimentResponse | null>(null);
+  const [sentiment, setSentiment] = useState<SentimentResponse["sentiment"] | null>(null);
   const [sentLoading, setSentLoading] = useState(false);
   const [sentErr, setSentErr] = useState<string | null>(null);
   const [showSentModal, setShowSentModal] = useState(false);
 
+  // ⭐ NEW: expand/collapse per-review
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
   const handleOpenReviews = async () => {
+    setExpandedIndex(null);//EK
     setShowSentModal(true);
 
-    // already loaded or loading → don’t refetch
     if (sentiment || sentLoading) return;
 
     setSentLoading(true);
     setSentErr(null);
 
     try {
-      const res = await fetch(
-        `/api/sentiment?place_id=${encodeURIComponent(p.place_id)}`
-      );
-      if (!res.ok) {
-        const msg = await res.text();
-        throw new Error(msg || `HTTP ${res.status}`);
-      }
+      const res = await fetch(`/api/sentiment?place_id=${encodeURIComponent(p.place_id)}`);
+      if (!res.ok) throw new Error(await res.text());
       const json: SentimentResponse = await res.json();
-      setSentiment(json);
+      setSentiment(json.sentiment);
     } catch (e: any) {
       setSentErr(e.message || "Failed to load review insights");
     } finally {
@@ -173,7 +201,6 @@ function PlaceCard({ p }: { p: Place }) {
   const handleOpenPhotos = async () => {
     setShowPhotosModal(true);
 
-    // already loaded or loading → don’t refetch
     if (photos || photosLoading) return;
 
     setPhotosLoading(true);
@@ -181,10 +208,7 @@ function PlaceCard({ p }: { p: Place }) {
 
     try {
       const res = await fetch(`/api/photo-proxy?place_id=${p.place_id}`);
-      if (!res.ok) {
-        const msg = await res.text();
-        throw new Error(msg || `HTTP ${res.status}`);
-      }
+      if (!res.ok) throw new Error(await res.text());
       const json: PhotosApiResponse = await res.json();
       setPhotos(json.photo_urls || []);
     } catch (e: any) {
@@ -196,26 +220,8 @@ function PlaceCard({ p }: { p: Place }) {
 
   return (
     <>
+      {/* ===================== CARD UI  ===================== */}
       <div className={styles.card}>
-        {/* --- Carousel Photo Section --- */}
-        {/* {photos.length > 0 && (
-          <div className={styles.carouselWrap}>
-            <Slider {...settings}>
-              {photos.map((url, idx) => (
-                <div key={idx} className={styles.slide}>
-                  <img
-                    src={`/api/photo-proxy?url=${encodeURIComponent(url)}`}
-                    alt={`${p.name} photo ${idx + 1}`}
-                    className={styles.slideImg}
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </Slider>
-          </div>
-        )} */}
-
-        {/* Main cover photo */}
         {photo && (
           <div className={styles.slide}>
             <img
@@ -224,13 +230,7 @@ function PlaceCard({ p }: { p: Place }) {
               className={styles.slideImg}
               loading="lazy"
             />
-
-            {/* "See more photos" button over the image */}
-            <button
-              type="button"
-              className={styles.photoMoreBtn}
-              onClick={handleOpenPhotos}
-            >
+            <button type="button" className={styles.photoMoreBtn} onClick={handleOpenPhotos}>
               See more photos
             </button>
           </div>
@@ -242,17 +242,13 @@ function PlaceCard({ p }: { p: Place }) {
           <div className={styles.ratingWrap}>
             {typeof p.rating === "number" ? (
               <>
-                <svg
-                  viewBox="0 0 24 24"
-                  className={styles.starIcon}
-                  aria-hidden="true"
-                >
+                <svg viewBox="0 0 24 24" className={styles.starIcon}>
                   <path d="M12 17.3l6.18 3.7-1.64-7.03L21 9.24l-7.19-.61L12 2 10.19 8.63 3 9.24l4.46 4.73L5.82 21z" />
                 </svg>
                 <span className={styles.ratingNum}>{p.rating.toFixed(1)}</span>
-                {p.user_ratings_total ? (
+                {p.user_ratings_total && (
                   <span className={styles.ratingCount}>({p.user_ratings_total})</span>
-                ) : null}
+                )}
               </>
             ) : (
               <span className={styles.badgeMuted}>No rating</span>
@@ -266,98 +262,80 @@ function PlaceCard({ p }: { p: Place }) {
         {tags.length > 0 && (
           <div className={styles.tagRow}>
             {tags.map((t) => (
-              <span key={t} className={styles.tag}>
-                {t}
-              </span>
+              <span key={t} className={styles.tag}>{t}</span>
             ))}
           </div>
         )}
 
-        {/* Inline row with button */}
         <div className={styles.sentimentInline}>
-          <button
-            type="button"
-            className={styles.sentimentLink}
-            onClick={handleOpenReviews}
-          >
-            {sentiment
-              ? "See what travelers are saying"
-              : "Discover review highlights for this place"}
+          <button type="button" className={styles.sentimentLink} onClick={handleOpenReviews}>
+            {sentiment ? "See what travelers are saying" : "Discover review highlights for this place"}
           </button>
         </div>
 
         <div className={styles.actionsRow}>
-           {/* Show only if website exists */}
-  {p.website && (
-    <a
-      className={styles.btnPrimary}
-      href={p.website}
-      target="_blank"
-      rel="noreferrer"
-    >
-      Book Now
-    </a>
-  )}
-  
-          <a
-            className={styles.btnOutline}
-            href={mapsSearch(p)}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open in Maps
-          </a>
-          <a
-            className={styles.btnGhost}
-            href={mapsDir(p)}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Directions
-          </a>
-          <button
-            type="button"
-            className={styles.btnGhost}
-            onClick={() => navigator.clipboard.writeText(p.address)}
-          >
+          {p.website && (
+            <a className={styles.btnPrimary} href={p.website} target="_blank" rel="noreferrer">
+              Book Now
+            </a>
+          )}
+          <a className={styles.btnOutline} href={mapsSearch(p)} target="_blank">Open in Maps</a>
+          <a className={styles.btnGhost} href={mapsDir(p)} target="_blank">Directions</a>
+          <button className={styles.btnGhost} onClick={() => navigator.clipboard.writeText(p.address)}>
             Copy address
           </button>
         </div>
       </div>
 
-      {/* Modal – content depends on loading / error / data */}
+      {/* ===================== SENTIMENT MODAL ===================== */}
       {showSentModal && (
-        <div
-          className={styles.modalOverlay}
-          onClick={() => setShowSentModal(false)}
-        >
-          <div
-            className={styles.modal}
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className={styles.modalOverlay} onClick={() => setShowSentModal(false)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+
             {/* HEADER */}
             <header className={styles.modalHeader}>
               <div>
                 <p className={styles.modalEyebrow}>Review insights</p>
                 <h3 className={styles.modalTitle}>{p.name}</h3>
+
+                {/* NEW: STAR RATING INSIDE MODAL */}
+                {p.rating && (
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "4px" }}>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <svg key={i} viewBox="0 0 24 24" width="18" height="18"
+                        fill={i < Math.round(p.rating) ? "#fbbf24" : "#e5e7eb"}>
+                        <path d="M12 17.3l6.18 3.7-1.64-7.03L21 9.24l-7.19-.61L12 2 10.19 8.63 3 9.24l4.46 4.73L5.82 21z" />
+                      </svg>
+                    ))}
+                    <span style={{ fontWeight: 600 }}>{p.rating.toFixed(1)}</span>
+                    <span style={{ color: "#6b7280", fontSize: "0.85rem" }}>({p.user_ratings_total})</span>
+                  </div>
+                )}
               </div>
-              <button
-                type="button"
-                className={styles.modalClose}
-                onClick={() => setShowSentModal(false)}
-                aria-label="Close"
-              >
+
+              <button className={styles.modalClose} onClick={() => setShowSentModal(false)}>
                 ✕
               </button>
             </header>
 
+            {/* NEW: PLACE PHOTO INSIDE MODAL */}
+            {photo && (
+              <img
+                src={`/api/photo-proxy?url=${encodeURIComponent(photo)}`}
+                alt="place"
+                style={{
+                  width: "100%",
+                  borderRadius: "12px",
+                  maxHeight: "220px",
+                  objectFit: "cover",
+                  marginBottom: "1rem",
+                }}
+              />
+            )}
+
             {/* LOADING / ERROR */}
-            {sentLoading && (
-              <p className={styles.modalMuted}>Loading reviews…</p>
-            )}
-            {sentErr && !sentLoading && (
-              <p className={styles.modalError}>{sentErr}</p>
-            )}
+            {sentLoading && <p className={styles.modalMuted}>Loading reviews…</p>}
+            {sentErr && !sentLoading && <p className={styles.modalError}>{sentErr}</p>}
 
             {/* CONTENT */}
             {sentiment && !sentLoading && !sentErr && (
@@ -366,103 +344,120 @@ function PlaceCard({ p }: { p: Place }) {
                 <section className={styles.modalStats}>
                   <div className={styles.modalStatPrimary}>
                     <span className={styles.modalStatNumber}>
-                      {sentiment.positive_ratio.toFixed(0)}%
+                      {sentiment.positive_ratio.toFixed(0)}
                     </span>
                     <span className={styles.modalStatLabel}>positive reviews</span>
                   </div>
                   <div className={styles.modalStatItem}>
                     <span className={styles.modalStatLabel}>Total reviews</span>
-                    <span className={styles.modalStatValue}>
-                      {sentiment.num_reviews}
-                    </span>
+                    <span className={styles.modalStatValue}>{sentiment.num_reviews}</span>
                   </div>
                   <div className={styles.modalStatItem}>
                     <span className={styles.modalStatLabel}>Avg score</span>
                     <span className={styles.modalStatValue}>
-                      {sentiment.avg_score.toFixed(2)}
+                      {Number(sentiment.avg_score).toFixed(2)}
                     </span>
                   </div>
                 </section>
 
-                {/* HUMAN SUMMARY */}
+                {/* OVERALL VIBE */}
                 <section className={styles.modalSection}>
                   <h4 className={styles.modalSectionTitle}>Overall vibe</h4>
-                  <p className={styles.modalHumanSummary}>
-                    {sentiment.human_summary}
-                  </p>
+                  <p className={styles.modalHumanSummary}>{sentiment.human_summary}</p>
                 </section>
 
                 {/* KEYWORDS */}
                 {sentiment.keywords.length > 0 && (
                   <section className={styles.modalSection}>
-                    <h4 className={styles.modalSectionTitle}>
-                      What people mention
-                    </h4>
+                    <h4 className={styles.modalSectionTitle}>What people mention</h4>
                     <div className={styles.modalKeywords}>
                       {sentiment.keywords.map((k) => (
-                        <span key={k} className={styles.modalKeyword}>
-                          #{k}
-                        </span>
+                        <span key={k} className={styles.modalKeyword}>#{k}</span>
                       ))}
                     </div>
                   </section>
                 )}
 
                 {/* SAMPLE REVIEWS */}
-                {sentiment.samples?.length > 0 && (
+                {sentiment.samples.length > 0 && (
                   <section className={styles.modalSection}>
-                    <h4 className={styles.modalSectionTitle}>Sample reviews</h4>
+                    <h4 className={styles.modalSectionTitle}>
+                      Review Highlights ({sentiment.samples.length})
+                    </h4>
+
                     <div className={styles.modalSamples}>
-                      {sentiment.samples.map((s, i) => (
-                        <article key={i} className={styles.modalSample}>
-                          <div className={styles.modalSampleMeta}>
-                            <span className={styles.modalSampleLabel}>
-                              {s.label === "POSITIVE" ? "Positive" : s.label}
-                            </span>
-                            <span className={styles.modalSampleScore}>
-                              Score {s.score.toFixed(2)}
-                            </span>
-                          </div>
-                          <p className={styles.modalSampleText}>{s.text}</p>
-                        </article>
-                      ))}
+                      {sentiment.samples.map((s, i) => {
+                        const cleanText = s.text.replace(/\s+/g, " ").trim();
+
+                        const isExpanded = expandedIndex === i;
+                        const isLong = cleanText.length > 250;
+
+                        const textToShow =
+                          !isLong || isExpanded
+                            ? cleanText
+                            : cleanText.slice(0, 250) + "...";
+
+                        return (
+                          <article key={i} className={styles.modalSample}>
+                            <div className={styles.modalSampleMeta}>
+                              <span className={styles.modalSampleLabel}>
+                                {s.label === "POSITIVE" ? "Positive" : s.label}
+                              </span>
+                              <span className={styles.modalSampleScore}>
+                                Score {s.score.toFixed(2)}
+                              </span>
+                            </div>
+
+                            <p className={styles.modalSampleText}>{textToShow}</p>
+
+                            {isLong && (
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setExpandedIndex(isExpanded ? null : i)
+                                }
+                                style={{
+                                  marginTop: "6px",
+                                  padding: 0,
+                                  border: "none",
+                                  background: "none",
+                                  color: "#2563eb",
+                                  fontSize: "0.85rem",
+                                  cursor: "pointer",
+                                }}
+                              >
+                                {isExpanded ? "Show less ↑" : "Show more ↓"}
+                              </button>
+                            )}
+                          </article>
+                        );
+                      })}
                     </div>
                   </section>
                 )}
+
               </>
             )}
           </div>
         </div>
       )}
 
-      {/* -------- Photos modal -------- */}
+      {/* ===================== PHOTOS MODAL ===================== */}
       {showPhotosModal && (
-        <div
-          className={styles.modalOverlay}
-          onClick={() => setShowPhotosModal(false)}
-        >
+        <div className={styles.modalOverlay} onClick={() => setShowPhotosModal(false)}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <header className={styles.modalHeader}>
               <div>
                 <p className={styles.modalEyebrow}>Photos</p>
                 <h3 className={styles.modalTitle}>{p.name}</h3>
               </div>
-              <button
-                type="button"
-                className={styles.modalClose}
-                onClick={() => setShowPhotosModal(false)}
-                aria-label="Close"
-              >
+              <button className={styles.modalClose} onClick={() => setShowPhotosModal(false)}>
                 ✕
               </button>
             </header>
 
-            {photosLoading && (
-              <p className={styles.modalMuted}>Loading photos…</p>
-            )}
-            {photosErr && !photosLoading && (
-              <p className={styles.modalError}>{photosErr}</p>
-            )}
+            {photosLoading && <p className={styles.modalMuted}>Loading photos…</p>}
+            {photosErr && !photosLoading && <p className={styles.modalError}>{photosErr}</p>}
 
             {photos && photos.length > 0 && !photosLoading && !photosErr && (
               <div className={styles.photosSliderWrap}>
@@ -491,6 +486,7 @@ function PlaceCard({ p }: { p: Place }) {
   );
 }
 
+
 // ---------- Page ----------
 export default function SmartItinerariesPage() {
   const params = useSearchParams();
@@ -499,7 +495,7 @@ export default function SmartItinerariesPage() {
   const [err, setErr] = useState<string | null>(null);
   const router = useRouter();
 
-  // local UI state (kept exactly as you have it)
+  // local UI state 
   const [query, setQuery] = useState("");
   const [minRating, setMinRating] = useState<number | null>(null);
   const [showAttr, setShowAttr] = useState(true);
@@ -604,14 +600,14 @@ export default function SmartItinerariesPage() {
   return (
     <div className={styles.pageWrap}>
       <div className={styles.backWrap}>
-  <button
-    type="button"
-    className={styles.backBtn}
-    onClick={() => router.back()}
-  >
-    ← Back
-  </button>
-</div>
+        <button
+          type="button"
+          className={styles.backBtn}
+          onClick={() => router.back()}
+        >
+          ← Back
+        </button>
+      </div>
       {/* Header */}
       <header className={styles.header}>
         <h1 className={styles.title}>
