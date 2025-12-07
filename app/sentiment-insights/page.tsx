@@ -98,7 +98,7 @@ export default function AttractionSentimentPage() {
     return (
         <div className={styles.pageWrap}>
             {/* Back Button */}
-            <div className={styles.backWrap}>
+            {/* <div className={styles.backWrap}>
                 <button
                     type="button"
                     className={styles.backBtn}
@@ -106,6 +106,11 @@ export default function AttractionSentimentPage() {
                 >
                     ← Back to Home
                 </button>
+            </div> */}
+            <div className={styles.topBar}>
+                <span className={styles.backLink} onClick={() => router.push("/")}>
+                    ← Back to Home
+                </span>
             </div>
             {/* Header */}
             <header className={styles.header}>

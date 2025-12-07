@@ -94,7 +94,7 @@ export default function BudgetOptimizerSearchPage() {
   return (
     <div className={styles.page}>
       {/* Back to Home – same as itinerary search */}
-      <div className={styles.backWrap}>
+      {/* <div className={styles.backWrap}>
         <button
           type="button"
           className={styles.backBtn}
@@ -102,6 +102,11 @@ export default function BudgetOptimizerSearchPage() {
         >
           ← Back to Home
         </button>
+      </div> */}
+      <div className={styles.topBar}>
+        <span className={styles.backLink} onClick={() => router.push("/")}>
+          ← Back to Home
+        </span>
       </div>
 
       <header className={styles.header}>
@@ -121,9 +126,8 @@ export default function BudgetOptimizerSearchPage() {
           </label>
           <input
             id="origin"
-            className={`${styles.input} ${
-              touched && errors.origin ? styles.inputError : ""
-            }`}
+            className={`${styles.input} ${touched && errors.origin ? styles.inputError : ""
+              }`}
             list="origin-airports"
             placeholder="e.g., YYZ"
             value={origin}
@@ -145,9 +149,8 @@ export default function BudgetOptimizerSearchPage() {
           </label>
           <input
             id="destination"
-            className={`${styles.input} ${
-              touched && errors.destination ? styles.inputError : ""
-            }`}
+            className={`${styles.input} ${touched && errors.destination ? styles.inputError : ""
+              }`}
             list="destination-airports"
             placeholder="e.g., BKK"
             value={destination}
@@ -171,9 +174,8 @@ export default function BudgetOptimizerSearchPage() {
           <input
             id="depart"
             type="date"
-            className={`${styles.input} ${
-              touched && errors.departDate ? styles.inputError : ""
-            }`}
+            className={`${styles.input} ${touched && errors.departDate ? styles.inputError : ""
+              }`}
             value={departDate}
             onChange={(e) => setDepartDate(e.target.value)}
           />
@@ -189,9 +191,8 @@ export default function BudgetOptimizerSearchPage() {
           <input
             id="return"
             type="date"
-            className={`${styles.input} ${
-              touched && errors.returnDate ? styles.inputError : ""
-            }`}
+            className={`${styles.input} ${touched && errors.returnDate ? styles.inputError : ""
+              }`}
             value={returnDate}
             onChange={(e) => setReturnDate(e.target.value)}
           />
@@ -210,9 +211,8 @@ export default function BudgetOptimizerSearchPage() {
             type="number"
             min={0}
             inputMode="numeric"
-            className={`${styles.inputNum} ${
-              touched && errors.budget ? styles.inputError : ""
-            }`}
+            className={`${styles.inputNum} ${touched && errors.budget ? styles.inputError : ""
+              }`}
             value={budget}
             onChange={(e) => setBudget(Number(e.target.value))}
           />
