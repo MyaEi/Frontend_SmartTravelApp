@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import styles from "./budget.module.css";
+import styles from "./budget-details.module.css";
 
 type BudgetPackage = {
   flight: {

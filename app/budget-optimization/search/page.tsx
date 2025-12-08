@@ -93,16 +93,6 @@ export default function BudgetOptimizerSearchPage() {
 
   return (
     <div className={styles.page}>
-      {/* Back to Home – same as itinerary search */}
-      {/* <div className={styles.backWrap}>
-        <button
-          type="button"
-          className={styles.backBtn}
-          onClick={() => router.push("/")}
-        >
-          ← Back to Home
-        </button>
-      </div> */}
       <div className={styles.topBar}>
         <span className={styles.backLink} onClick={() => router.push("/")}>
           ← Back to Home
@@ -112,14 +102,12 @@ export default function BudgetOptimizerSearchPage() {
       <header className={styles.header}>
         <h1 className={styles.title}>Optimize your trip budget</h1>
         <p className={styles.subtitle}>
-          Tell us your route, dates, and total budget—then we’ll build
+          Tell us your route, dates, and total budget—then we'll build
           smart packages that include flights and on-trip costs.
         </p>
       </header>
 
-      {/* This <form> uses the same card styling as your itinerary form */}
       <form className={styles.form} onSubmit={onSubmit} noValidate>
-        {/* Row 1: Origin + Destination */}
         <div className={styles.field}>
           <label htmlFor="origin" className={styles.label}>
             Origin (airport code) <span className={styles.req}>*</span>
@@ -166,7 +154,6 @@ export default function BudgetOptimizerSearchPage() {
           )}
         </div>
 
-        {/* Row 2: Dates */}
         <div className={styles.field}>
           <label htmlFor="depart" className={styles.label}>
             Departure date <span className={styles.req}>*</span>
@@ -201,7 +188,6 @@ export default function BudgetOptimizerSearchPage() {
           )}
         </div>
 
-        {/* Row 3: Budget + Currency */}
         <div className={styles.field}>
           <label htmlFor="budget" className={styles.label}>
             Total trip budget <span className={styles.req}>*</span>
@@ -265,7 +251,6 @@ export default function BudgetOptimizerSearchPage() {
           </div>
         </div>
 
-        {/* Actions – same style as itinerary page */}
         <div className={styles.actions}>
           <button
             type="submit"
@@ -286,7 +271,7 @@ export default function BudgetOptimizerSearchPage() {
       </form>
 
       <footer className={styles.footerNote}>
-        On the next page, you’ll see package options with flights, extras,
+        On the next page, you'll see package options with flights, extras,
         and how much budget you have left.
       </footer>
     </div>

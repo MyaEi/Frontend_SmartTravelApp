@@ -1,0 +1,757 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #b5dbff 0%, #ffffff 70%);
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  padding: 2rem 1rem;
+}
+
+.header {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.backBtn {
+  background: white;
+  border: 2px solid #667eea;
+  color: #667eea;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.backBtn:hover {
+  background: #667eea;
+  color: white;
+  transform: translateX(-2px);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: #4a5568;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.summaryRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.summaryItem {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.summaryItem:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.summaryLabel {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.summaryValue {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  display: block;
+}
+
+.section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(102, 126, 234, 0.25);
+  border-color: #667eea;
+}
+
+.bestPick {
+  border: 3px solid #fbbf24;
+  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.3);
+}
+
+.bestPick:hover {
+  box-shadow: 0 12px 32px rgba(251, 191, 36, 0.4);
+}
+
+.cardHeader {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.75rem;
+  color: white;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.bestBadge {
+  background: #fbbf24;
+  color: #78350f;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.scoreRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.scoreLabel {
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.scoreValue {
+  font-weight: 700;
+  font-size: 1.25rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+}
+
+.badgeWithin {
+  background: #48bb78;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+.badgeOver {
+  background: #f56565;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+.qualityBar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.qualityMetric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.qualityMetric:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+.qualityMetric span:first-child {
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qualityMetric span:last-child {
+  color: #667eea;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.infoIcon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  opacity: 0.6;
+  transition: all 0.2s;
+}
+
+.infoIcon:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  padding: 12px 16px;
+  background: #1a202c;
+  color: white;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.6;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.2s ease;
+  white-space: normal;
+  max-width: 280px;
+  text-align: center;
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #1a202c;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.insightsBox {
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+  border-left: 4px solid #667eea;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #4c51bf;
+  margin: 0;
+  font-weight: 500;
+}
+
+.cardBody {
+  padding: 1.75rem;
+}
+
+.costRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.costRow:hover {
+  background: #f8fafc;
+  margin: 0 -0.5rem;
+  padding: 1rem 0.5rem;
+  border-radius: 8px;
+}
+
+.costRow span:first-child {
+  color: #475569;
+  font-weight: 600;
+}
+
+.costRow span:last-child {
+  color: #1a202c;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.clickable {
+  cursor: pointer;
+  color: #667eea;
+  user-select: none;
+  transition: all 0.2s;
+}
+
+.clickable:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+.detailsBox {
+  margin: 1rem 0;
+  padding: 1.25rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detailsTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 1rem 0;
+}
+
+.flightInfo,
+.hotelInfo {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: #475569;
+}
+
+.flightInfo p,
+.hotelInfo p {
+  margin: 0.5rem 0;
+}
+
+.flightInfo strong,
+.hotelInfo strong {
+  color: #1a202c;
+  font-weight: 600;
+}
+
+.itinerarySection {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.itineraryTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.duration {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #667eea;
+  background: #eef2ff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+}
+
+.segmentCard {
+  background: #f8fafc;
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1rem;
+}
+
+.segmentCard:last-child {
+  margin-bottom: 0;
+}
+
+.segmentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.carrier {
+  font-weight: 700;
+  color: #1a202c;
+  font-size: 1rem;
+}
+
+.aircraft {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.flightRoute {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.flightPoint {
+  text-align: center;
+}
+
+.airportCode {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 0.5rem;
+}
+
+.time {
+  font-size: 0.9rem;
+  color: #1a202c;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.terminal {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.flightLine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  border-left: 2px dashed #cbd5e1;
+  border-right: 2px dashed #cbd5e1;
+}
+
+.flightDuration {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.directBadge {
+  background: #48bb78;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.detailsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detailsList li {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+  color: #475569;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.bookLink {
+  color: #667eea;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+  background: #eef2ff;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.bookLink:hover {
+  background: #667eea;
+  color: white;
+}
+
+.reasoningBox {
+  margin: 1rem 0;
+  padding: 1.25rem;
+  background: #f8fafc;
+  border-left: 4px solid #667eea;
+  border-radius: 8px;
+  animation: slideDown 0.3s ease;
+}
+
+.reasoning {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: #475569;
+  white-space: pre-wrap;
+}
+
+.divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+  margin: 1.5rem 0;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.remainingRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 2px solid #86efac;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #16a34a;
+  margin-top: 1rem;
+}
+
+.cardFooter {
+  background: #f8fafc;
+  padding: 1.25rem 1.75rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.fxLabel {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.muted {
+  color: #94a3b8;
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 3rem;
+  font-weight: 500;
+}
+
+/* Loading States */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+  gap: 1.5rem;
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  border: 6px solid rgba(255, 255, 255, 0.2);
+  border-top: 6px solid #fbbf24;
+  border-right: 6px solid #667eea;
+  border-bottom: 6px solid #764ba2;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes spin {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+  }
+}
+
+.loadingSteps {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 500px;
+  width: 100%;
+}
+
+.loadingSteps li {
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  border-left: 4px solid #ffffff;
+  font-size: 1rem;
+  color: #1a202c;
+  font-weight: 500;
+  animation: fadeInUp 0.5s ease forwards, pulse 2s ease-in-out infinite;
+  opacity: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loadingSteps li:nth-child(1) { animation-delay: 0.1s; }
+.loadingSteps li:nth-child(2) { animation-delay: 0.2s; }
+.loadingSteps li:nth-child(3) { animation-delay: 0.3s; }
+.loadingSteps li:nth-child(4) { animation-delay: 0.4s; }
+.loadingSteps li:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem 0.5rem;
+  }
+
+  .header,
+  .section {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryRow {
+    grid-template-columns: 1fr;
+  }
+
+  .qualityBar {
+    grid-template-columns: 1fr;
+  }
+
+  .flightRoute {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .flightLine {
+    border-left: none;
+    border-right: none;
+    border-top: 2px dashed #cbd5e1;
+    border-bottom: 2px dashed #cbd5e1;
+    padding: 0.75rem 0;
+  }
+
+  .airportCode {
+    font-size: 1.5rem;
+  }
+}
