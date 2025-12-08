@@ -59,9 +59,9 @@ export default function Navbar({ loginUrl, signupUrl }: Props) {
             <li className="nav-item">
               <Link className="nav-link me-4" href="/contact">Contact Us</Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <span className="nav-link me-4"><i className="fas fa-dollar-sign" /> CAD</span>
-            </li>
+            </li> */}
             {!loading && (
               user ? (
                 <>

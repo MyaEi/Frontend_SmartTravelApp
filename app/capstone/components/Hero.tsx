@@ -24,10 +24,10 @@ export default function Hero() {
               </p>
               <h3 style={{ margin: 0, color: '#2c3e50' }}>We care about your trip</h3>
               <p style={{ lineHeight: 1.6, color: '#2c3e50', margin: 0 }}>
-                ✨ Trusted by travelers, designed for you.<br/><br/>
-                We believe every journey should be <strong>simple, smart, and stress-free</strong>.<br/>
-                Our Intelligent Trip Planner helps you build itineraries, optimize budgets, and suggest the best experiences — all with your comfort in mind.<br/><br/>
-                Sit back, relax, and let us make your trip unforgettable. 🌍✈️
+                Trusted by travelers, designed for you.<br /><br />
+                We believe every journey should be <strong>simple, smart, and stress-free</strong>.<br />
+                Our Intelligent Trip Planner helps you build itineraries, optimize budgets, and suggest the best experiences — all with your comfort in mind.<br /><br />
+                Sit back, relax, and let us make your trip unforgettable. 
               </p>
             </div>
           </div>
@@ -39,48 +39,88 @@ export default function Hero() {
           <h3 className="fade-in-scale-header text-uppercase text-center fw-bold" style={{ color: '#2c3e50', backgroundColor: 'rgb(235, 235, 241)' }}>
             Enjoy Services for your trip
           </h3>
-          <div id="cardCarousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <div className="row">
-                  <div className="col-12 col-md-3 mb-4">
-                    <Link href="/smart-itineraries/search" className="card clickable-card servicecard_hover text-decoration-none">
-                      <img src="/capstone/images/trip-plan1.jpg" className="card-img-top" alt="Smart itineraries" />
-                      <div className="card-body">
-                        <h3 className="card-title">Smart itineraries</h3>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col-12 col-md-3 mb-4">
-                    <Link href="/budget-optimization/search" className="card clickable-card servicecard_hover text-decoration-none">
-                      <img src="/capstone/images/budget2.jpg" className="card-img-top" alt="Budget Optimization" />
-                      <div className="card-body">
-                        <h3 className="card-title">Budget Optimization</h3>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col-12 col-md-3 mb-4">
-                    <Link href="/sentiment-insights" className="card clickable-card servicecard_hover text-decoration-none">
-                      <img src="/capstone/images/sentiment2.jpeg" className="card-img-top" alt="Sentiment Insights" />
-                      <div className="card-body">
-                        <h3 className="card-title">Sentiment Insights</h3>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col-12 col-md-3 mb-4">
-                    <Link href="/language-buddy" className="card clickable-card servicecard_hover text-decoration-none">
-                      <img src="/capstone/images/language.jpeg" className="card-img-top" alt="Language Buddy" />
-                      <div className="card-body">
-                        <h3 className="card-title">Language Buddy</h3>
-                      </div>
-                    </Link>
-                  </div>
-                  {/* <div className="col-md-4">
-                    <div className="card border border-0">
-                      <img src="/capstone/images/alberta2.jpg" className="card-img-top" alt="Image 1" />
-                      <h5 className="card-title text-center my-3 fw-semibold">Alberta</h5>
-                    </div>
-                  </div> */}
+          <div className="row g-4 justify-content-center">
+            {/* SMART ITINERARIES */}
+            <div className="col-12 col-sm-6 col-md-4 col-lg-2-4">
+              <div className="travel-card wide-card">
+                <img src="/capstone/images/trip-plan1.jpg" className="travel-card-img" />
+
+                <div className="travel-card-body">
+                  <h4 className="travel-card-title">Smart Itineraries</h4>
+                  <p className="travel-card-text">
+                    Generate personalized day-by-day travel plans.
+                  </p>
+                  <Link href="/smart-itineraries/search" className="travel-card-btn solid-btn">
+                    Explore
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* BUDGET */}
+            <div className="col-12 col-sm-6 col-md-4 col-lg-2-4">
+              <div className="travel-card wide-card">
+                <img src="/capstone/images/budget2.jpg" className="travel-card-img" />
+
+                <div className="travel-card-body">
+                  <h4 className="travel-card-title">Budget Optimization</h4>
+                  <p className="travel-card-text">
+                    Find destinations that match your travel budget.
+                  </p>
+                  <Link href="/budget-optimization/search" className="travel-card-btn solid-btn">
+                    Optimize
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* SENTIMENT */}
+            <div className="col-12 col-sm-6 col-md-4 col-lg-2-4">
+              <div className="travel-card wide-card">
+                <img src="/capstone/images/t1-1.jpg" className="travel-card-img" />
+
+                <div className="travel-card-body">
+                  <h4 className="travel-card-title">Sentiment Insights</h4>
+                  <p className="travel-card-text">
+                    See what travelers say about your destination.
+                  </p>
+                  <Link href="/sentiment-insights" className="travel-card-btn solid-btn">
+                    Insights
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* LANGUAGE */}
+            <div className="col-12 col-sm-6 col-md-4 col-lg-2-4">
+              <div className="travel-card wide-card">
+                <img src="/capstone/images/languageBuddy.jpg" className="travel-card-img" />
+
+                <div className="travel-card-body">
+                  <h4 className="travel-card-title">Language Buddy</h4>
+                  <p className="travel-card-text">
+                    Translate conversations instantly.
+                  </p>
+                  <Link href="/language-buddy" className="travel-card-btn solid-btn">
+                    Translate
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* SEASONAL */}
+            <div className="col-12 col-sm-6 col-md-4 col-lg-2-4">
+              <div className="travel-card wide-card">
+                <img src="/capstone/images/alberta2.jpg" className="travel-card-img" />
+
+                <div className="travel-card-body">
+                  <h4 className="travel-card-title">Seasonal Suggestions</h4>
+                  <p className="travel-card-text">
+                    Discover events, holidays & attractions.
+                  </p>
+                  <Link href="/seasonal-suggestions/details" className="travel-card-btn solid-btn">
+                    Explore
+                  </Link>
                 </div>
               </div>
             </div>
@@ -88,63 +128,63 @@ export default function Hero() {
         </div>
       </section>
 
-    <section>
-      <div className="container">
-        <div id="cardCarousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
-          <h3 className="text-left fw-bold mt-5">Recommendations (Find things to do by interest)</h3>
-          
-          <div className="carousel-inner my-2">
-            {/* Slide 1 */}
-            <div className="carousel-item active">
-              <div className="row">
-                <div className="col-md-4 border border-0">
-                  <div className="card border border-0">
-                    <img src="/capstone/images/lake-louise.jpg" className="card-img-top" alt="Calgary" />
-                    <h5 className="card-title text-center my-3 fw-semibold">Calgary</h5>
+      <section>
+        <div className="container">
+          <div id="cardCarousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+            <h3 className="text-left fw-bold mt-5">Recommendations (Find things to do by interest)</h3>
+
+            <div className="carousel-inner my-2">
+              {/* Slide 1 */}
+              <div className="carousel-item active">
+                <div className="row">
+                  <div className="col-md-4 border border-0">
+                    <div className="card border border-0">
+                      <img src="/capstone/images/lake-louise.jpg" className="card-img-top" alt="Calgary" />
+                      <h5 className="card-title text-center my-3 fw-semibold">Calgary</h5>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="card border border-0">
+                      <img src="/capstone/images/banff.jpg" className="card-img-top" alt="Banff" />
+                      <h5 className="card-title text-center my-3 fw-semibold">Banff</h5>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="card border border-0">
+                      <img src="/capstone/images/jasper.jpg" className="card-img-top" alt="Jasper" />
+                      <h5 className="card-title text-center my-3 fw-semibold">Jasper</h5>
+                    </div>
                   </div>
                 </div>
-                <div className="col-md-4">
-                  <div className="card border border-0">
-                    <img src="/capstone/images/banff.jpg" className="card-img-top" alt="Banff" />
-                    <h5 className="card-title text-center my-3 fw-semibold">Banff</h5>
+              </div>
+
+              {/* Slide 2 */}
+              <div className="carousel-item">
+                <div className="row">
+                  <div className="col-md-4">
+                    <div className="card border border-0">
+                      <img src="/capstone/images/lake_louise_credit_finn_beales_0.webp" className="card-img-top" alt="Finn Beales" />
+                      <h5 className="card-title text-center my-3 fw-semibold">Finn Beales</h5>
+                    </div>
                   </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="card border border-0">
-                    <img src="/capstone/images/jasper.jpg" className="card-img-top" alt="Jasper" />
-                    <h5 className="card-title text-center my-3 fw-semibold">Jasper</h5>
+                  <div className="col-md-4">
+                    <div className="card border border-0">
+                      <img src="/capstone/images/lake-louise.jpg" className="card-img-top" alt="Lake Louise" />
+                      <h5 className="card-title text-center my-3 fw-semibold">Lake Louise</h5>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="card border border-0">
+                      <img src="/capstone/images/alberta2.jpg" className="card-img-top" alt="Alberta" />
+                      <h5 className="card-title text-center my-3 fw-semibold">Alberta</h5>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Slide 2 */}
-            <div className="carousel-item">
-              <div className="row">
-                <div className="col-md-4">
-                  <div className="card border border-0">
-                    <img src="/capstone/images/lake_louise_credit_finn_beales_0.webp" className="card-img-top" alt="Finn Beales" />
-                    <h5 className="card-title text-center my-3 fw-semibold">Finn Beales</h5>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="card border border-0">
-                    <img src="/capstone/images/lake-louise.jpg" className="card-img-top" alt="Lake Louise" />
-                    <h5 className="card-title text-center my-3 fw-semibold">Lake Louise</h5>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="card border border-0">
-                    <img src="/capstone/images/alberta2.jpg" className="card-img-top" alt="Alberta" />
-                    <h5 className="card-title text-center my-3 fw-semibold">Alberta</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Controls */}
-          {/* <button className="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+            {/* Controls */}
+            {/* <button className="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
             <span className="visually-hidden">Previous</span>
           </button>
@@ -153,14 +193,14 @@ export default function Hero() {
             <span className="visually-hidden">Next</span>
           </button> */}
 
-          {/* Indicators */}
-          {/* <div className="carousel-indicators">
+            {/* Indicators */}
+            {/* <div className="carousel-indicators">
             <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
           </div> */}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
 
       <section>
