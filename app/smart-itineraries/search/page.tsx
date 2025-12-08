@@ -36,7 +36,7 @@ export default function SmartItinerariesSearchPage() {
     "Luxury": 4
   };
 
-  // Example suggestions (swap with Places API later if you like)
+  // Example suggestions 
   const suggestions = useMemo(
     () => [
       "Toronto",
@@ -86,14 +86,20 @@ export default function SmartItinerariesSearchPage() {
   return (
     <div className={styles.page}>
       {/* Back Button */}
-      <div className={styles.backWrap}>
+      {/* <div className={styles.backWrap}>
         <button
           type="button"
-          className={styles.backBtn}
+          className={styles.backToHome}
           onClick={() => router.push("/")}
         >
           ← Back to Home
         </button>
+      </div> */}
+
+      <div className={styles.topBar}>
+        <span className={styles.backLink} onClick={() => router.push("/")}>
+          ← Back to Home
+        </span>
       </div>
 
       <header className={styles.header}>

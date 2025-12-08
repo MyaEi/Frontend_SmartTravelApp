@@ -1,46 +1,49 @@
 /* Root layout */
 .page {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 2rem 1rem 4rem;
+  min-height: 100vh;
+  width: 100vw;
 
-  /* 🌊 Ocean Blue Travel Theme */
-  /* background: linear-gradient(180deg, #dff3ff 0%, #ffffff 70%),
-    url("/images/world-map-light.svg"); */
+  /* Full dark navy background */
+  /* background: linear-gradient(180deg, #052b4d 0%, #031a2e 100%); */
+  /* background: linear-gradient(180deg, #075da8 0%, #075da8 100%); */
+  background: linear-gradient(180deg, #b5dbff 0%, #ffffff 70%);
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  background: linear-gradient(180deg, #b5dbff 0%, #ffffff 70%),
-    url("/images/world-map-light.svg");
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: 92%, cover;
-  background-attachment: fixed;
-
-  color: #111827;
+  /* padding: 2.5rem 1rem 4rem; */
+  /* padding: 0 1rem 4rem; */
+  padding-top: 80px;
+  color: #ffffff;
 }
 
 
 /* Header section */
 .header {
   text-align: left;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .title {
   font-size: clamp(1.8rem, 1.2rem + 1.5vw, 2.4rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #1f2937;
+  /* color: #1f2937; */
+  color: #054378;
+  text-align: center;
+
 }
 
 .subtitle {
-  color: #6b7280;
+  /* color: #6b7280; */
+  color: #054378;
   margin-top: 0.35rem;
 }
 
 /* Form container */
 .form {
-  background: #ffffff;
+  background: lch(100% 0.01 296.81);
   border: 1px solid #e5e7eb;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -131,9 +134,9 @@
 }
 
 .pillActive {
-  background: #2563eb;
+  background: #075da8;
   color: #ffffff;
-  border-color: #2563eb;
+  border-color: #052b4d;
   box-shadow: 0 4px 8px rgba(37, 99, 235, 0.25);
 }
 
@@ -209,8 +212,8 @@
 }
 
 .primary {
-  background: #2563eb;
-  color: white;
+  background: #075da8;
+  color: #ffffff;
   font-weight: 700;
   border: none;
   border-radius: 0.7rem;
@@ -229,9 +232,11 @@
 }
 
 .ghost {
-  background: white;
+  /* background: white; */
   border: 1px solid #d1d5db;
-  color: #374151;
+  /* color: #374151; */
+  background: #075da8;
+  color: #ffffff;
   border-radius: 0.7rem;
   padding: 0.8rem 1.2rem;
   font-weight: 600;
@@ -245,7 +250,8 @@
 
 /* Footer note */
 .footerNote {
-  color: #6b7280;
+  /* color: #6b7280; */
+  color: #ffffff;
   font-size: 0.9rem;
   margin-top: 1.25rem;
   text-align: left;
@@ -283,4 +289,29 @@
 .backBtn:hover {
   color: #1d4ed8;
   transform: translateX(-2px);
+}
+
+.topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 52px;
+  background: linear-gradient(180deg, #083c6d 0%, #052b52 100%);
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  z-index: 1000;
+}
+
+.backLink {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.backLink:hover {
+  opacity: 0.8;
 }
